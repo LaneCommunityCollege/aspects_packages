@@ -1,0 +1,7 @@
+---
+aspects_packages_enabled: False
+aspects_packages_packages:
+  epel:
+    state: "default"
+    CentOS:
+      7: "epel-release"

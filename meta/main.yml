@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: David Reagan
+  description: An Ansible utility role that helps manage OS package state based on what OS is on the target.
+  company: Lane Community College
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  - name: CentOS
+    versions:
+    - 7
+  - name: Debian
+    versions:
+    - stretch
+  categories:
+  - packaging
+  - system
+dependencies: []

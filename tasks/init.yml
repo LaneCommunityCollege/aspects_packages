@@ -1,0 +1,12 @@
+---
+- name: "install packages"
+  include_tasks: "{{ ansible_pkg_mgr}}InstallPackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: "remove packages"
+  include_tasks: "{{ ansible_pkg_mgr}}RemovePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
