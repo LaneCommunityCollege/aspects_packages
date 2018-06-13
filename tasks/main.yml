@@ -1,5 +1,5 @@
 ---
-- import_tasks: "init.yml"
+- include_tasks: "init.yml"
   when: aspects_packages_enabled
   tags:
   - aspects_packages
