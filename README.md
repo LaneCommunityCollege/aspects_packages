@@ -14,6 +14,13 @@ Default: `False`
 
 Set to `True` to run this role.
 
+### `aspects_packages_prerequisite_packages`
+A dictionary/hash of packages that should be installed before any others.
+
+Uses the same format as `aspects_packages_packages`.
+
+Currently only used for CentOS 7, since CentOS uses packages to configure extra repositories like the EPEL repo.
+
 ### `aspects_packages_packages.epel`
 This controls the Extra Packages for Enterprise Linux (EPEL) `yum` repository. Currently it is only configured for CentOS 7.
 
