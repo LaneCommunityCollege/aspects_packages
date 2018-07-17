@@ -1,0 +1,18 @@
+---
+- name: yum - Set repository state
+  yum_repository:
+    state: "{{ item.value.state }}"
+    name: "{{ item.value.name }}"
+    description: "{{ item.value.description }}"
+    gpgkey: "{{ item.value.gpgkey }}"
+    baseurl: "{{ item.value.baseurl }}"
+    sslverify: "{{ item.value.sslverify }}"
+    repo_gpgcheck: "{{ item.value.repo_gpgcheck }}"
+    gpgcheck: "{{ item.value.gpgcheck }}"
+    enabled: "{{ item.value.enabled }}"
+    sslcacert: "{{ item.value.sslcacert }}"
+    metadata_expire: "{{ item.value.metadata_expire }}"
+  with_dict: "{{ aspects_packages_add_repo_yum_repos|default({}) }}"
+  tags:
+  - aspects_packages
+  - aspects_packages_add_repo_yum

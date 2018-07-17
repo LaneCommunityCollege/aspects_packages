@@ -1,12 +1,20 @@
 ---
+- name: "add repositories"
+  when: aspects_packages_add_repo_apt_repos is defined or aspects_packages_add_repo_yum_repos is defined
+  include_tasks: "{{ ansible_pkg_mgr }}AddRepository.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+    - aspects_packages_add_repo_yum
+
 - name: "install packages"
-  include_tasks: "{{ ansible_pkg_mgr}}InstallPackages.yml"
+  include_tasks: "{{ ansible_pkg_mgr }}InstallPackages.yml"
   tags:
     - aspects_packages
     - aspects_packages_package_install
 
 - name: "remove packages"
-  include_tasks: "{{ ansible_pkg_mgr}}RemovePackages.yml"
+  include_tasks: "{{ ansible_pkg_mgr }}RemovePackages.yml"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
