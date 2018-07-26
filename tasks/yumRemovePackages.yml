@@ -16,3 +16,39 @@
     - aspects_packages
     - aspects_packages_package_remove
     - aspects_packages_package_remove_yum
+
+- name: yum - Remove packages on OracleLinux 7
+  when:
+    (
+      item.value.OracleLinux is defined and
+      item.value.OracleLinux.7 is defined and
+      ansible_distribution == "OracleLinux" and
+      ansible_distribution_major_version == "7" and
+      item.value.state == "absent"
+    )
+  yum:
+    name: "{{ item.value.OracleLinux.7 }}"
+    state: "{{ item.value.state }}"
+  with_dict: "{{ aspects_packages_packages }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: yum - Remove packages on OracleLinux 6
+  when:
+    (
+      item.value.OracleLinux is defined and
+      item.value.OracleLinux.6 is defined and
+      ansible_distribution == "OracleLinux" and
+      ansible_distribution_major_version == "6" and
+      item.value.state == "absent"
+    )
+  yum:
+    name: "{{ item.value.OracleLinux.6 }}"
+    state: "{{ item.value.state }}"
+  with_dict: "{{ aspects_packages_packages }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum

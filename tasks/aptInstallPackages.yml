@@ -21,7 +21,6 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-
 - name: install Ubuntu 16.04 packages
   when:
     (
@@ -44,6 +43,27 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
+- name: install Ubuntu 18.04 packages
+  when:
+    (
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1804 is defined and
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "18.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        )
+    )
+  apt:
+    pkg: "{{ item.value.Ubuntu.1804 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_packages_packages }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
 - name: install Debian 9 packages
   when:

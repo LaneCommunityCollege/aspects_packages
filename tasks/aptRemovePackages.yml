@@ -16,7 +16,6 @@
     - aspects_packages_package_remove
     - aspects_packages_package_remove_apt
 
-
 - name: remove Ubuntu 16.04 packages
   when:
     - item.value.Ubuntu is defined
@@ -34,6 +33,22 @@
     - aspects_packages_package_remove
     - aspects_packages_package_remove_apt
 
+- name: remove Ubuntu 18.04 packages
+  when:
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1804 is defined
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version == "18.04"
+    - item.value.state == "absent"
+  apt:
+    pkg: "{{ item.value.Ubuntu.1804 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_packages_packages }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Debian 9 packages
   when:
