@@ -40,7 +40,9 @@
   - aspects_packages_add_repo_apt
 
 - name: apt - Add extra repos
-  when: aspects_packages_add_repo_apt_repos is defined and item.value.enabled
+  when: aspects_packages_add_repo_apt_repos is defined and
+    item.value.enabled and
+    item.value.repo is defined
   apt_repository:
     repo: "{{ item.value.repo }}"
   with_dict: "{{ aspects_packages_add_repo_apt_repos }}"
