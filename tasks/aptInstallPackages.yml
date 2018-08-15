@@ -14,6 +14,7 @@
   apt:
     pkg: "{{ item.value.Ubuntu.1404 }}"
     state: "{{ item.value.state }}"
+    update_cache: "yes"
     cache_valid_time: "14400"
   with_dict: "{{ aspects_packages_packages }}"
   tags:
@@ -36,6 +37,7 @@
   apt:
     pkg: "{{ item.value.Ubuntu.1604 }}"
     state: "{{ item.value.state }}"
+    update_cache: "yes"
     cache_valid_time: "14400"
   with_dict: "{{ aspects_packages_packages }}"
   tags:
@@ -58,6 +60,7 @@
   apt:
     pkg: "{{ item.value.Ubuntu.1804 }}"
     state: "{{ item.value.state }}"
+    update_cache: "yes"
     cache_valid_time: "14400"
   with_dict: "{{ aspects_packages_packages }}"
   tags:
@@ -80,6 +83,7 @@
   apt:
     pkg: "{{ item.value.Debian.9 }}"
     state: "{{ item.value.state }}"
+    update_cache: "yes"
     cache_valid_time: "14400"
   with_dict: "{{ aspects_packages_packages }}"
   tags:
