@@ -2,8 +2,10 @@
 - name: apt - Add keys for repos using direct url.
   when:
     aspects_packages_add_repo_apt_repos is defined and
+    item.value.enabled and
     item.value.key_url is defined
   apt_key:
+    state: "present"
     url: "{{ item.value.key_url }}"
   with_dict: "{{ aspects_packages_add_repo_apt_repos }}"
   tags:
@@ -13,8 +15,10 @@
 - name: apt - Add keys for repos using keyserver and id.
   when:
     aspects_packages_add_repo_apt_repos is defined and
+    item.value.enabled and
     item.value.keyserver is defined
   apt_key:
+    state: "present"
     keyserver: "{{ item.value.keyserver }}"
     id: "{{ item.value.key_id }}"
   with_dict: "{{ aspects_packages_add_repo_apt_repos }}"
@@ -22,8 +26,23 @@
   - aspects_packages
   - aspects_packages_add_repo_apt
 
+- name: apt - Add keys for repos using data.
+  when:
+    aspects_packages_add_repo_apt_repos is defined and
+    item.value.enabled and
+    item.value.data is defined
+  apt_key:
+    state: "present"
+    data: "{{ item.value.data }}"
+  with_dict: "{{ aspects_packages_add_repo_apt_repos }}"
+  tags:
+  - aspects_packages
+  - aspects_packages_add_repo_apt
+
 - name: apt - Add extra repos
-  when: aspects_packages_add_repo_apt_repos is defined
+  when: aspects_packages_add_repo_apt_repos is defined and
+    item.value.enabled and
+    item.value.repo is defined
   apt_repository:
     repo: "{{ item.value.repo }}"
   with_dict: "{{ aspects_packages_add_repo_apt_repos }}"
