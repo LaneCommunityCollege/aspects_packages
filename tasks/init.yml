@@ -12,6 +12,7 @@
   tags:
     - aspects_packages
     - aspects_packages_package_install
+    - aspects_packages_prerequisite_package_install
 
 - name: "remove packages"
   include_tasks: "{{ ansible_pkg_mgr }}RemovePackages.yml"
