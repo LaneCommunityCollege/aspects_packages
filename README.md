@@ -1,5 +1,5 @@
 # aspects_packages
-An Ansible utility role that helps manage OS package state based on what OS is on the target.
+An Ansible utility role that helps manage OS package state based on what OS is on the target. Can also manage simple pip packages.
   
 # Requirements
 Set ```hash_behaviour=merge``` in your ansible.cfg file.
@@ -50,6 +50,26 @@ Set `state` to "absent" if you wish to remove a package.
 
 Check the [tasks/aptInstallpackages.yml](aptInstallpackages.yml) or [tasks/yumInstallPackages.yml](yumInstallPackages.yml) files to find out what values are accepted for the `ansible_distribution_*` variables.
 
+### `aspects_packages_pip_enabled`
+Boolean. Whether the role should run pip tasks.
+
+Default: `False`
+
+Set to `True` to run pip tasks.
+
+> Remember to install pip on your target system first.
+
+### `aspects_packages_pip_packages`
+A dictionary/hash of packages to install.
+
+Use this pattern:
+
+```yaml
+aspects_packages_pip_packages:
+  < key >:
+    state: "< present|absent >"
+    name: "< package name >"
+```
 
 # Dependencies
 None.
@@ -84,6 +104,10 @@ None.
           7: "vim"
         Debian:
           9: "vim"
+    aspects_packages_pip_packages:
+      passlib:
+        state: "present"
+        name: "passlib"
   roles:
   - aspects_packages
 ```

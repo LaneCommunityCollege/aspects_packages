@@ -1,0 +1,12 @@
+---
+- name: pip - remove a package
+  when: item.value.state == "absent"
+  pip:
+    state: "{{ item.value.state }}"
+    name: "{{ item.value.name }}"
+  with_dict: "{{ aspects_packages_pip_packages }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_pip
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_pip

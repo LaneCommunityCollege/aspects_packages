@@ -5,3 +5,4 @@ aspects_packages_packages:
     state: "default"
     CentOS:
       7: "epel-release"
+aspects_packages_pip_enabled: False

@@ -19,3 +19,21 @@
   tags:
     - aspects_packages
     - aspects_packages_package_remove
+
+- name: "Install pip packages"
+  when: aspects_packages_pip_enabled
+  include_tasks: "pipInstallPackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_pip
+    - aspects_packages_package_install
+    - aspects_packages_package_install_pip
+
+- name: "Remove pip packages"
+  when: aspects_packages_pip_enabled
+  include_tasks: "pipRemovePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_pip
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_pip
