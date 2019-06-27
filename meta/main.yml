@@ -4,13 +4,16 @@ galaxy_info:
   description: An Ansible utility role that helps manage OS package state based on what OS is on the target.
   company: Lane Community College
   license: MIT
-  min_ansible_version: 2.4
+  min_ansible_version: 2.5
   platforms:
   - name: Ubuntu
     versions:
-    - trusty
     - xenial
+    - bionic
   - name: CentOS
+    versions:
+    - 7
+  - name: OracleLinux
     versions:
     - 7
   - name: Debian

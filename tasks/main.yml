@@ -1,5 +1,7 @@
 ---
 - include_tasks: "init.yml"
   when: aspects_packages_enabled
+  register: inprocess_aspects_packages_ran
   tags:
   - aspects_packages
+  - aspects_packages_add_repo_apt

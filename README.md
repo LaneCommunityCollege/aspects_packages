@@ -78,19 +78,64 @@ None.
 ```yaml
 - hosts:
   - aspectscentos7
-  - aspectstrusty
+  - aspectsoraclelinux7
   - aspectsxenial
+  - aspectsbionic
   - aspectsstretch
   vars:
     aspects_packages_enabled: True
-    aspects_packages_packages:
-      epel:
+    aspects_packages_add_repo_apt_repos:
+      git:
+        enabled: True
+        repo: "ppa:git-core/ppa"
+    aspects_packages_add_repo_yum_repos:
+      docker-ce-stable:
         state: "present"
+        name: "docker-ce-stable"
+        description: "docker-ce-stable"
+        gpgkey: "https://download.docker.com/linux/centos/gpg"
+        baseurl: "https://download.docker.com/linux/centos/7/$basearch/stable"
+        sslverify: "yes"
+        repo_gpgcheck: "no"
+        gpgcheck: "no"
+        enabled: "yes"
+        sslcacert: "/etc/ssl/certs/ca-bundle.crt"
+        metadata_expire: "300"
+      docker-ce-stable-source:
+        state: "present"
+        name: "docker-ce-stable-source"
+        description: "docker-ce-stable-source"
+        gpgkey: "https://download.docker.com/linux/centos/gpg"
+        baseurl: "https://download.docker.com/linux/centos/7/source/stable"
+        sslverify: "yes"
+        repo_gpgcheck: "no"
+        gpgcheck: "no"
+        enabled: "yes"
+        sslcacert: "/etc/ssl/certs/ca-bundle.crt"
+        metadata_expire: "300"
+    aspects_packages_prerequisite_packages:
+      epel-release:
+        state: "present"
+        CentOS:
+          7: "epel-release"
+      oracle-epel-release-el7:
+        state: "present"
+        OracleLinux:
+          7 : "oracle-epel-release-el7"
+      oracle-release-el7:
+        state: "present"
+        OracleLinux:
+          7: "oracle-release-el7"
+      oracle-softwarecollection-release-el7:
+        state: "present"
+        OracleLinux:
+          7: "oracle-softwarecollection-release-el7"
+    aspects_packages_packages:
       htop:
         state: "present"
         Ubuntu:
-          1404: "htop"
           1604: "htop"
+          1804: "htop"
         CentOS:
           7: "htop"
         Debian:
@@ -104,6 +149,25 @@ None.
           7: "vim"
         Debian:
           9: "vim"
+      python_apt:
+        state: "present"
+        Ubuntu:
+          1604: "python-apt"
+          1804: "python-apt"
+        Debian:
+          9: "python-apt"
+      python_pip:
+        state: "present"
+        Ubuntu:
+          1604: "python-pip"
+          1804: "python-pip"
+        Debian:
+          9: "python-pip"
+        CentOS:
+          7: "python2-pip"
+        OracleLinux:
+          7: "python2-pip"
+    aspects_packages_pip_enabled: True
     aspects_packages_pip_packages:
       passlib:
         state: "present"

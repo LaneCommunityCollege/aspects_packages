@@ -12,7 +12,7 @@
     enabled: "{{ item.value.enabled }}"
     sslcacert: "{{ item.value.sslcacert }}"
     metadata_expire: "{{ item.value.metadata_expire }}"
-  with_dict: "{{ aspects_packages_add_repo_yum_repos|default({}) }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos|dict2items }}"
   tags:
   - aspects_packages
   - aspects_packages_add_repo_yum

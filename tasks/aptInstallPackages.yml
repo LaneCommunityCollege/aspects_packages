@@ -16,7 +16,7 @@
     state: "{{ item.value.state }}"
     update_cache: "yes"
     cache_valid_time: "14400"
-  with_dict: "{{ aspects_packages_packages }}"
+  loop: "{{ aspects_packages_packages|dict2items }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -39,7 +39,7 @@
     state: "{{ item.value.state }}"
     update_cache: "yes"
     cache_valid_time: "14400"
-  with_dict: "{{ aspects_packages_packages }}"
+  loop: "{{  aspects_packages_packages|dict2items }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -62,7 +62,7 @@
     state: "{{ item.value.state }}"
     update_cache: "yes"
     cache_valid_time: "14400"
-  with_dict: "{{ aspects_packages_packages }}"
+  loop: "{{  aspects_packages_packages|dict2items }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -85,7 +85,7 @@
     state: "{{ item.value.state }}"
     update_cache: "yes"
     cache_valid_time: "14400"
-  with_dict: "{{ aspects_packages_packages }}"
+  loop: "{{  aspects_packages_packages|dict2items }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

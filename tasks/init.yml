@@ -1,26 +1,57 @@
 ---
-- name: "add repositories"
-  when: aspects_packages_add_repo_apt_repos is defined or aspects_packages_add_repo_yum_repos is defined
-  include_tasks: "{{ ansible_pkg_mgr }}AddRepository.yml"
+- name: "APT - add repositories"
+  when:
+    - ansible_pkg_mgr == "apt"
+    - aspects_packages_add_repo_apt_repos is defined
+  include_tasks: "aptAddRepository.yml"
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
+
+- name: "YUM - add repositories"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - aspects_packages_add_repo_yum_repos is defined
+  include_tasks: "yumAddRepository.yml"
+  tags:
+    - aspects_packages
     - aspects_packages_add_repo_yum
 
-- name: "install packages"
-  include_tasks: "{{ ansible_pkg_mgr }}InstallPackages.yml"
+- name: "APT - install packages"
+  when:
+    - ansible_pkg_mgr == "apt"
+  include_tasks: "aptInstallPackages.yml"
   tags:
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
 
-- name: "remove packages"
-  include_tasks: "{{ ansible_pkg_mgr }}RemovePackages.yml"
+- name: "YUM - install packages"
+  when:
+    - ansible_pkg_mgr == "yum"
+  include_tasks: "yumInstallPackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_prerequisite_package_install
+
+- name: "APT - remove packages"
+  when:
+    - ansible_pkg_mgr == "apt"
+  include_tasks: "aptRemovePackages.yml"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
 
-- name: "Install pip packages"
+- name: "YUM - remove packages"
+  when:
+    - ansible_pkg_mgr == "yum"
+  include_tasks: "yumRemovePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+
+- name: "PIP - install packages"
   when: aspects_packages_pip_enabled
   include_tasks: "pipInstallPackages.yml"
   tags:
@@ -29,7 +60,7 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_pip
 
-- name: "Remove pip packages"
+- name: "PIP - remove packages"
   when: aspects_packages_pip_enabled
   include_tasks: "pipRemovePackages.yml"
   tags:
