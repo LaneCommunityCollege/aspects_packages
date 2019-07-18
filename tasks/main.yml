@@ -1,6 +1,8 @@
 ---
 - include_tasks: "init.yml"
-  when: aspects_packages_enabled
+  when:
+    - aspects_packages_enabled
+    - inprocess_aspects_packages_ran is not defined
   register: inprocess_aspects_packages_ran
   tags:
   - aspects_packages
