@@ -1,6 +1,6 @@
 ---
 - name: pip - remove a package
-  when: item.value.state == "absent"
+  when: item.value.state == "absent" or item.value.state == "purged"
   pip:
     state: "{{ item.value.state }}"
     name: "{{ item.value.name }}"

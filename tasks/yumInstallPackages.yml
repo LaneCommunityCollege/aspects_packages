@@ -1,84 +1,181 @@
 ---
-- name: yum - Install prerequisite packages on CentOS 7
+- name: yum - Install prerequisite packages on CentOS 7 state present
   when:
-    (
-      item.value.CentOS is defined and
-      item.value.CentOS.7 is defined and
-      ansible_distribution == "CentOS" and
-      ansible_distribution_major_version == "7" and
-      (
-        item.value.state == "present" or
-        item.value.state == "latest"
-      )
-    )
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ item.value.CentOS.7 }}"
-    state: "{{ item.value.state }}"
-  loop: "{{  aspects_packages_prerequisite_packages|dict2items }}"
+    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_prerequisite_centos7_result_present
   tags:
     - aspects_packages
     - aspects_packages_prerequisite_package_install
     - aspects_packages_package_install_yum
 
-- name: yum - Install packages on CentOS 7
+- name: yum - Install prerequisite packages on OracleLinux 7 state present
   when:
-    (
-      item.value.CentOS is defined and
-      item.value.CentOS.7 is defined and
-      ansible_distribution == "CentOS" and
-      ansible_distribution_major_version == "7" and
-      (
-        item.value.state == "present" or
-        item.value.state == "latest"
-      )
-    )
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ item.value.CentOS.7 }}"
-    state: "{{ item.value.state }}"
-  loop: "{{  aspects_packages_packages|dict2items }}"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_yum
-
-- name: yum - Install prerequisite packages on OracleLinux 7
-  when:
-    (
-      item.value.OracleLinux is defined and
-      item.value.OracleLinux.7 is defined and
-      ansible_distribution == "OracleLinux" and
-      ansible_distribution_major_version == "7" and
-      (
-        item.value.state == "present" or
-        item.value.state == "latest"
-      )
-    )
-  yum:
-    name: "{{ item.value.OracleLinux.7 }}"
-    state: "{{ item.value.state }}"
-  loop: "{{  aspects_packages_prerequisite_packages|dict2items }}"
+    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux7_result_present
   tags:
     - aspects_packages
     - aspects_packages_prerequisite_package_install
     - aspects_packages_package_install_yum
 
-- name: yum - Install packages on OracleLinux 7
+- name: yum - Install prerequisite packages on CentOS 7 state latest
   when:
-    (
-      item.value.OracleLinux is defined and
-      item.value.OracleLinux.7 is defined and
-      ansible_distribution == "OracleLinux" and
-      ansible_distribution_major_version == "7" and
-      (
-        item.value.state == "present" or
-        item.value.state == "latest"
-      )
-    )
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ item.value.OracleLinux.7 }}"
-    state: "{{ item.value.state }}"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_prerequisite_centos7_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
+
+- name: yum - Install prerequisite packages on OracleLinux 7 state latest
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "7"
+  yum:
+    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux7_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_present
+  when: inprocess_prerequisite_centos7_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux7_result_present
+  when: inprocess_prerequisite_oraclelinux7_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_latest
+  when: inprocess_prerequisite_centos7_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux7_result_latest
+  when: inprocess_prerequisite_oraclelinux7_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+## End install prerequisite packages
+
+## Start install packages
+- name: yum - Install packages on CentOS 7 state present
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+  yum:
+    name: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_centos7_result_present
   tags:
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_yum
+
+- name: yum - Install packages on OracleLinux 7 state present
+  when:
+      - ansible_distribution == "OracleLinux"
+      - ansible_distribution_major_version == "7"
+  yum:
+    name: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_oraclelinux7_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_yum
+
+- name: yum - Install packages on CentOS 7 state latest
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+  yum:
+    name: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_centos7_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_yum
+
+- name: yum - Install packages on OracleLinux 7 state latest
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "7"
+  yum:
+    name: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_oraclelinux7_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_yum
+
+- name: Log list of packages when change occurs inprocess_centos7_result_present
+  when: inprocess_centos7_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of packages when change occurs inprocess_oraclelinux7_result_present
+  when: inprocess_oraclelinux7_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of packages when change occurs inprocess_centos7_result_latest
+  when: inprocess_centos7_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of packages when change occurs inprocess_oraclelinux7_result_latest
+  when: inprocess_oraclelinux7_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+## End install packages

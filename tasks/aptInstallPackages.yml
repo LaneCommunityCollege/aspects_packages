@@ -1,69 +1,292 @@
 ---
-- name: install Ubuntu 16.04 packages
+## Start install aspects_packages_prerequisite_packages
+- name: install Ubuntu 16.04 prerequisite packages with state present
   when:
-    (
-      item.value.Ubuntu is defined and
-      item.value.Ubuntu.1604 is defined and
-      ansible_distribution == "Ubuntu" and
-      ansible_distribution_version == "16.04" and
-        (
-          item.value.state == "present" or
-          item.value.state == "latest"
-        )
-    )
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ item.value.Ubuntu.1604 }}"
-    state: "{{ item.value.state }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+  register: inprocess_prerequisite_xenial_result_present
   tags:
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: install Ubuntu 18.04 packages
+- name: install Ubuntu 18.04 prerequisite packages with state present
   when:
-    (
-      item.value.Ubuntu is defined and
-      item.value.Ubuntu.1804 is defined and
-      ansible_distribution == "Ubuntu" and
-      ansible_distribution_version == "18.04" and
-        (
-          item.value.state == "present" or
-          item.value.state == "latest"
-        )
-    )
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ item.value.Ubuntu.1804 }}"
-    state: "{{ item.value.state }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+  register: inprocess_prerequisite_bionic_result_present
   tags:
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: install Debian 9 packages
+- name: install Debian 9 prerequisite packages with state present
   when:
-    (
-      item.value.Debian is defined and
-      item.value.Debian.9 is defined and
-      ansible_distribution == "Debian" and
-      ansible_distribution_major_version == "9" and
-        (
-          item.value.state == "present" or
-          item.value.state == "latest"
-        )
-    )
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ item.value.Debian.9 }}"
-    state: "{{ item.value.state }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+  register: inprocess_prerequisite_stretch_result_present
   tags:
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+
+- name: install Ubuntu 16.04 prerequisite packages with state latest
+  when:
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_prerequisite_xenial_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Ubuntu 18.04 prerequisite packages with state latest
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_prerequisite_bionic_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Debian 9 prerequisite packages with state latest
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_prerequisite_stretch_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_present
+  when: inprocess_prerequisite_xenial_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_present
+  when: inprocess_prerequisite_bionic_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_present
+  when: inprocess_prerequisite_stretch_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_latest
+  when: inprocess_prerequisite_xenial_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_latest
+  when: inprocess_prerequisite_bionic_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_latest
+  when: inprocess_prerequisite_stretch_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+## End install aspects_packages_prerequisite_packages
+
+## Start install aspects_packages_packages
+- name: install Ubuntu 16.04 packages with state present
+  when:
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "present"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_xenial_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Ubuntu 18.04 packages with state present
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "present"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_bionic_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Debian 9 packages with state present
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "present"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_stretch_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Ubuntu 16.04 packages with state latest
+  when:
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_xenial_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Ubuntu 18.04 packages with state latest
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_bionic_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: install Debian 9 packages with state latest
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_stretch_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_xenial_result_present
+  when: inprocess_xenial_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_bionic_result_present
+  when: inprocess_bionic_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_stretch_result_present
+  when: inprocess_stretch_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_xenial_result_latest
+  when: inprocess_xenial_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_bionic_result_latest
+  when: inprocess_bionic_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_stretch_result_latest
+  when: inprocess_stretch_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+## End install aspects_packages_packages

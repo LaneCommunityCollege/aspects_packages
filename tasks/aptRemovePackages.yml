@@ -1,76 +1,274 @@
 ---
-- name: remove Ubuntu 14.04 packages
+## Start remove aspects_packages_prerequisite_packages
+- name: remove Ubuntu 16.04 prerequisite packages with state absent 
   when:
-    - item.value.Ubuntu is defined
-    - item.value.Ubuntu.1404 is defined
-    - ansible_distribution == "Ubuntu"
-    - ansible_distribution_version == "14.04"
-    - item.value.state == "absent"
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ item.value.Ubuntu.1404 }}"
-    state: "{{ item.value.state }}"
-    cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+  register: inprocess_prerequisite_xenial_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_apt
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
-- name: remove Ubuntu 16.04 packages
+- name: remove Ubuntu 18.04 prerequisite packages with state absent 
   when:
-    - item.value.Ubuntu is defined
-    - item.value.Ubuntu.1604 is defined
-    - ansible_distribution == "Ubuntu"
-    - ansible_distribution_version == "16.04"
-    - item.value.state == "absent"
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ item.value.Ubuntu.1604 }}"
-    state: "{{ item.value.state }}"
-    cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+  register: inprocess_prerequisite_bionic_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_apt
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
-- name: remove Ubuntu 18.04 packages
+- name: remove Debian 9 prerequisite packages with state absent 
   when:
-    - item.value.Ubuntu is defined
-    - item.value.Ubuntu.1804 is defined
-    - ansible_distribution == "Ubuntu"
-    - ansible_distribution_version == "18.04"
-    - item.value.state == "absent"
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ item.value.Ubuntu.1804 }}"
-    state: "{{ item.value.state }}"
-    cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "absent"
+  register: inprocess_prerequisite_stretch_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_apt
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
-- name: remove Debian 9 packages
+- name: remove Ubuntu 16.04 prerequisite packages with state purged
   when:
-    - item.value.Debian is defined
-    - item.value.Debian.9 is defined
-    - ansible_distribution == "Debian"
-    - ansible_distribution_major_version == "9"
-    - item.value.state == "absent"
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ item.value.Debian.9 }}"
-    state: "{{ item.value.state }}"
-    cache_valid_time: "14400"
-  loop: "{{  aspects_packages_packages|dict2items }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_prerequisite_xenial_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_apt
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
-- name: Remove dependencies that are no longer required
+- name: remove Ubuntu 18.04 prerequisite packages with state purged
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
   apt:
-    autoremove: yes
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_prerequisite_bionic_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_apt
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Debian 9 prerequisite packages with state purged
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_prerequisite_stretch_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_absent 
+  when: inprocess_prerequisite_xenial_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_absent 
+  when: inprocess_prerequisite_bionic_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_absent 
+  when: inprocess_prerequisite_stretch_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_purged
+  when: inprocess_prerequisite_xenial_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_purged
+  when: inprocess_prerequisite_bionic_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_purged
+  when: inprocess_prerequisite_stretch_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+## End remove aspects_packages_prerequisite_packages
+
+## Start remove aspects_packages_packages
+- name: remove Ubuntu 16.04 packages with state absent 
+  when:
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+  register: inprocess_xenial_result_absent 
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Ubuntu 18.04 packages with state absent 
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+  register: inprocess_bionic_result_absent 
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Debian 9 packages with state absent 
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "absent"
+  register: inprocess_stretch_result_absent 
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Ubuntu 16.04 packages with state purged
+  when:
+    - ansible_lsb.codename == "xenial"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_xenial_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Ubuntu 18.04 packages with state purged
+  when:
+    - ansible_lsb.codename == "bionic"
+    - ansible_lsb.id == "Ubuntu"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_bionic_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: remove Debian 9 packages with state purged
+  when:
+    - ansible_lsb.codename == "stretch"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    state: "absent"
+    purge: "yes"
+  register: inprocess_stretch_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_xenial_result_absent 
+  when: inprocess_xenial_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_bionic_result_absent 
+  when: inprocess_bionic_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_stretch_result_absent 
+  when: inprocess_stretch_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_xenial_result_purged
+  when: inprocess_xenial_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_bionic_result_purged
+  when: inprocess_bionic_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of packages when change occurs inprocess_stretch_result_purged
+  when: inprocess_stretch_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+## End remove aspects_packages_packages
