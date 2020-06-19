@@ -2,8 +2,21 @@
 ## Start install aspects_packages_prerequisite_packages
 - name: install Ubuntu 16.04 prerequisite packages with state present
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu"
+=======
+    (
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1404 is defined and
+      (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS") and
+      ansible_distribution_version == "14.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        )
+    )
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "present"
@@ -17,8 +30,21 @@
 
 - name: install Ubuntu 18.04 prerequisite packages with state present
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu"
+=======
+    (
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1604 is defined and
+      (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS") and
+      ansible_distribution_version == "16.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        )
+    )
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "present"
@@ -32,8 +58,21 @@
 
 - name: install Debian 9 prerequisite packages with state present
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
+=======
+    (
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1804 is defined and
+      (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS") and
+      ansible_distribution_version == "18.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        )
+    )
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
     state: "present"

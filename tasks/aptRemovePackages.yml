@@ -2,8 +2,16 @@
 ## Start remove aspects_packages_prerequisite_packages
 - name: remove Ubuntu 16.04 prerequisite packages with state absent 
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu"
+=======
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1404 is defined
+    - (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS")
+    - ansible_distribution_version == "14.04"
+    - item.value.state == "absent"
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "absent"
@@ -15,8 +23,16 @@
 
 - name: remove Ubuntu 18.04 prerequisite packages with state absent 
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu"
+=======
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1604 is defined
+    - (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS")
+    - ansible_distribution_version == "16.04"
+    - item.value.state == "absent"
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "absent"
@@ -28,8 +44,16 @@
 
 - name: remove Debian 9 prerequisite packages with state absent 
   when:
+<<<<<<< Updated upstream
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
+=======
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1804 is defined
+    - (ansible_distribution == "Ubuntu" or ansible_distribution == "Pop!_OS")
+    - ansible_distribution_version == "18.04"
+    - item.value.state == "absent"
+>>>>>>> Stashed changes
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
     state: "absent"
