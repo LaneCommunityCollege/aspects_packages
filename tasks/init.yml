@@ -1,4 +1,20 @@
 ---
+- name: "APT - install prerequisite packages"
+  when:
+    - ansible_pkg_mgr == "apt"
+  include_tasks: "aptInstallPrerequisitePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+
+- name: "YUM - install prerequisite packages"
+  when:
+    - ansible_pkg_mgr == "yum"
+  include_tasks: "yumInstallPrerequisitePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+
 - name: "APT - add repositories"
   when:
     - ansible_pkg_mgr == "apt"
@@ -24,7 +40,6 @@
   tags:
     - aspects_packages
     - aspects_packages_package_install
-    - aspects_packages_prerequisite_package_install
 
 - name: "YUM - install packages"
   when:
@@ -33,7 +48,6 @@
   tags:
     - aspects_packages
     - aspects_packages_package_install
-    - aspects_packages_prerequisite_package_install
 
 - name: "APT - remove packages"
   when:
@@ -50,21 +64,3 @@
   tags:
     - aspects_packages
     - aspects_packages_package_remove
-
-- name: "PIP - install packages"
-  when: aspects_packages_pip_enabled
-  include_tasks: "pipInstallPackages.yml"
-  tags:
-    - aspects_packages
-    - aspects_packages_pip
-    - aspects_packages_package_install
-    - aspects_packages_package_install_pip
-
-- name: "PIP - remove packages"
-  when: aspects_packages_pip_enabled
-  include_tasks: "pipRemovePackages.yml"
-  tags:
-    - aspects_packages
-    - aspects_packages_pip
-    - aspects_packages_package_remove
-    - aspects_packages_package_remove_pip

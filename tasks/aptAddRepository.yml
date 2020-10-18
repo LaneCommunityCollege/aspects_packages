@@ -1,53 +1,356 @@
 ---
-- name: apt - Add keys for repos using direct url.
+- name: Ubuntu 16.04 - apt - Add keys for repos using direct url
   when:
-    - aspects_packages_add_repo_apt_repos is defined
-    - item.value.enabled
-    - item.value.key_url is defined
+    - ansible_lsb.codename == "xenial"
   apt_key:
     state: "present"
-    url: "{{ item.value.key_url }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos|dict2items }}"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Ubuntu.1604', 'defined')
+              | list
+              | map(attribute='value.key_url.Ubuntu.1604')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 18.04 - apt - Add keys for repos using direct url
+  when:
+    - ansible_lsb.codename == "bionic"
+  apt_key:
+    state: "present"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Ubuntu.1804', 'defined')
+              | list
+              | map(attribute='value.key_url.Ubuntu.1804')
+              | list
+          }}"
   tags:
   - aspects_packages
   - aspects_packages_add_repo_apt
 
-- name: apt - Add keys for repos using keyserver and id.
+- name: Ubuntu 20.04 - apt - Add keys for repos using direct url
   when:
-    - aspects_packages_add_repo_apt_repos is defined
-    - item.value.enabled
-    - item.value.keyserver is defined
+    - ansible_lsb.codename == "focal"
   apt_key:
     state: "present"
-    keyserver: "{{ item.value.keyserver }}"
-    id: "{{ item.value.key_id }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos|dict2items }}"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Ubuntu.2004', 'defined')
+              | list
+              | map(attribute='value.key_url.Ubuntu.2004')
+              | list
+          }}"
   tags:
-  - aspects_packages
-  - aspects_packages_add_repo_apt
+    - aspects_packages
+    - aspects_packages_add_repo_apt
 
-- name: apt - Add keys for repos using data.
+- name: Debian 9 - apt - Add keys for repos using direct url
   when:
-    - aspects_packages_add_repo_apt_repos is defined
-    - item.value.enabled
-    - item.value.data is defined
+    - ansible_lsb.codename == "stretch"
   apt_key:
     state: "present"
-    data: "{{ item.value.data }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos|dict2items }}"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Debian.9', 'defined')
+              | list
+              | map(attribute='value.key_url.Debian.9')
+              | list
+          }}"
   tags:
-  - aspects_packages
-  - aspects_packages_add_repo_apt
+    - aspects_packages
+    - aspects_packages_add_repo_apt
 
-- name: apt - Add extra repos
+- name: Debian 10 - apt - Add keys for repos using direct url
   when:
-    - aspects_packages_add_repo_apt_repos is defined
-    - item.value.enabled
-    - item.value.repo is defined
+    - ansible_lsb.codename == "buster"
+  apt_key:
+    state: "present"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Debian.10', 'defined')
+              | list
+              | map(attribute='value.key_url.Debian.10')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 16.04 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "xenial"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Ubuntu.1604 }}"
+    id: "{{ item.value.key_id.Ubuntu.1604 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Ubuntu.1604', 'defined')
+              | selectattr('value.keyserver.Ubuntu.1604', 'defined')
+              | list
+        }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 18.04 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "bionic"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Ubuntu.1804 }}"
+    id: "{{ item.value.key_id.Ubuntu.1804 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Ubuntu.1804', 'defined')
+              | selectattr('value.keyserver.Ubuntu.1804', 'defined')
+              | list
+        }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 20.04 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "focal"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Ubuntu.2004 }}"
+    id: "{{ item.value.key_id.Ubuntu.2004 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Ubuntu.2004', 'defined')
+              | selectattr('value.keyserver.Ubuntu.2004', 'defined')
+              | list
+        }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 9 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "stretch"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Debian.9 }}"
+    id: "{{ item.value.key_id.Debian.9 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Debian.9', 'defined')
+              | selectattr('value.keyserver.Debian.9', 'defined')
+              | list
+        }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 10 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "buster"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Debian.10 }}"
+    id: "{{ item.value.key_id.Debian.10 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Debian.10', 'defined')
+              | selectattr('value.keyserver.Debian.10', 'defined')
+              | list
+        }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+
+- name: Ubuntu 16.04 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "xenial"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Ubuntu.1604', 'defined')
+              | list
+              | map(attribute='value.data.Ubuntu.1604')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 18.04 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "bionic"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Ubuntu.1804', 'defined')
+              | list
+              | map(attribute='value.data.Ubuntu.1804')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 20.04 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "focal"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Ubuntu.2004', 'defined')
+              | list
+              | map(attribute='value.data.Ubuntu.2004')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 9 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "stretch"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Debian.9', 'defined')
+              | list
+              | map(attribute='value.data.Debian.9')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 10 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "buster"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Debian.10', 'defined')
+              | list
+              | map(attribute='value.data.Debian.10')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 16.04 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "xenial"
   apt_repository:
-    repo: "{{ item.value.repo }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos|dict2items }}"
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Ubuntu.1604', 'defined')
+              | list
+              | map(attribute='value.repo.Ubuntu.1604')
+              | list
+          }}"
   tags:
-  - aspects_packages
-  - aspects_packages_add_repo_apt
+    - aspects_packages
+    - aspects_packages_add_repo_apt
 
+- name: Ubuntu 18.04 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "bionic"
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Ubuntu.1804', 'defined')
+              | list
+              | map(attribute='value.repo.Ubuntu.1804')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Ubuntu 20.04 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "focal"
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Ubuntu.2004', 'defined')
+              | list
+              | map(attribute='value.repo.Ubuntu.2004')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 9 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "stretch"
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Debian.9', 'defined')
+              | list
+              | map(attribute='value.repo.Debian.9')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 10 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "buster"
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Debian.10', 'defined')
+              | list
+              | map(attribute='value.repo.Debian.10')
+              | list
+          }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt

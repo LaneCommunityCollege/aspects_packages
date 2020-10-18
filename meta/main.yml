@@ -10,6 +10,7 @@ galaxy_info:
     versions:
     - xenial
     - bionic
+    - focal
   - name: CentOS
     versions:
     - 7
@@ -19,6 +20,7 @@ galaxy_info:
   - name: Debian
     versions:
     - stretch
+    - buster
   categories:
   - packaging
   - system

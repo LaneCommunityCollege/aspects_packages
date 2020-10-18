@@ -1,18 +1,38 @@
 ---
-- name: yum - Set repository state
+- name: CentOS 7 - yum - Set repository state
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
   yum_repository:
-    state: "{{ item.value.state }}"
-    name: "{{ item.value.name }}"
-    description: "{{ item.value.description }}"
-    gpgkey: "{{ item.value.gpgkey }}"
-    baseurl: "{{ item.value.baseurl }}"
-    sslverify: "{{ item.value.sslverify }}"
-    repo_gpgcheck: "{{ item.value.repo_gpgcheck }}"
-    gpgcheck: "{{ item.value.gpgcheck }}"
-    enabled: "{{ item.value.enabled }}"
-    sslcacert: "{{ item.value.sslcacert }}"
-    metadata_expire: "{{ item.value.metadata_expire }}"
+    state: "{{ item.value.CentOS.7.state }}"
+    name: "{{ item.value.CentOS.7.name }}"
+    description: "{{ item.value.CentOS.7.description }}"
+    gpgkey: "{{ item.value.CentOS.7.gpgkey }}"
+    baseurl: "{{ item.value.CentOS.7.baseurl }}"
+    sslverify: "{{ item.value.CentOS.7.sslverify }}"
+    repo_gpgcheck: "{{ item.value.CentOS.7.repo_gpgcheck }}"
+    gpgcheck: "{{ item.value.CentOS.7.gpgcheck }}"
+    enabled: "{{ item.value.CentOS.7.enabled }}"
   loop: "{{ aspects_packages_add_repo_yum_repos|dict2items }}"
   tags:
   - aspects_packages
   - aspects_packages_add_repo_yum
+
+- name: OracleLinux 7 - yum - Set repository state
+  when:
+      - ansible_distribution == "OracleLinux"
+      - ansible_distribution_major_version == "7"
+  yum_repository:
+    state: "{{ item.value.OracleLinux.7.state }}"
+    name: "{{ item.value.OracleLinux.7.name }}"
+    description: "{{ item.value.OracleLinux.7.description }}"
+    gpgkey: "{{ item.value.OracleLinux.7.gpgkey }}"
+    baseurl: "{{ item.value.OracleLinux.7.baseurl }}"
+    sslverify: "{{ item.value.OracleLinux.7.sslverify }}"
+    repo_gpgcheck: "{{ item.value.OracleLinux.7.repo_gpgcheck }}"
+    gpgcheck: "{{ item.value.OracleLinux.7.gpgcheck }}"
+    enabled: "{{ item.value.OracleLinux.7.enabled }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos|dict2items }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_yum
