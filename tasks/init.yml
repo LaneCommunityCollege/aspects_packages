@@ -1,4 +1,36 @@
 ---
+- name: "APT - remove prerequisite packages"
+  when:
+    - ansible_pkg_mgr == "apt"
+  include_tasks: "aptRemovePrerequisitePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_remove
+
+- name: "YUM - remove prerequisite packages"
+  when:
+    - ansible_pkg_mgr == "yum"
+  include_tasks: "yumRemovePrerequisitePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_remove
+
+- name: "APT - remove packages"
+  when:
+    - ansible_pkg_mgr == "apt"
+  include_tasks: "aptRemovePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+
+- name: "YUM - remove packages"
+  when:
+    - ansible_pkg_mgr == "yum"
+  include_tasks: "yumRemovePackages.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+
 - name: "APT - install prerequisite packages"
   when:
     - ansible_pkg_mgr == "apt"
@@ -49,18 +81,3 @@
     - aspects_packages
     - aspects_packages_package_install
 
-- name: "APT - remove packages"
-  when:
-    - ansible_pkg_mgr == "apt"
-  include_tasks: "aptRemovePackages.yml"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_remove
-
-- name: "YUM - remove packages"
-  when:
-    - ansible_pkg_mgr == "yum"
-  include_tasks: "yumRemovePackages.yml"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_remove

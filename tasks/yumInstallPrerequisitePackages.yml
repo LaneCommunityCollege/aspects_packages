@@ -4,7 +4,7 @@
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
     state: "present"
     update_cache: True
   register: inprocess_prerequisite_centos7_result_present
@@ -18,7 +18,7 @@
     - ansible_distribution == "OracleLinux"
     - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
     state: "present"
     update_cache: True
   register: inprocess_prerequisite_oraclelinux7_result_present
@@ -32,7 +32,7 @@
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
     state: "latest"
     update_cache: True
   register: inprocess_prerequisite_centos7_result_latest
@@ -47,7 +47,7 @@
     - ansible_distribution == "OracleLinux"
     - ansible_distribution_major_version == "7"
   yum:
-    name: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
     state: "latest"
     update_cache: True
   register: inprocess_prerequisite_oraclelinux7_result_latest
@@ -59,7 +59,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_present
   when: inprocess_prerequisite_centos7_result_present.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -67,7 +67,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux7_result_present
   when: inprocess_prerequisite_oraclelinux7_result_present.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -75,7 +75,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_latest
   when: inprocess_prerequisite_centos7_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -83,7 +83,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux7_result_latest
   when: inprocess_prerequisite_oraclelinux7_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

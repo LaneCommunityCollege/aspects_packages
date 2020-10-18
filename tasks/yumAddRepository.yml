@@ -13,7 +13,7 @@
     repo_gpgcheck: "{{ item.value.CentOS.7.repo_gpgcheck }}"
     gpgcheck: "{{ item.value.CentOS.7.gpgcheck }}"
     enabled: "{{ item.value.CentOS.7.enabled }}"
-  loop: "{{ aspects_packages_add_repo_yum_repos|dict2items }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos|default({})|dict2items }}"
   tags:
   - aspects_packages
   - aspects_packages_add_repo_yum
@@ -32,7 +32,7 @@
     repo_gpgcheck: "{{ item.value.OracleLinux.7.repo_gpgcheck }}"
     gpgcheck: "{{ item.value.OracleLinux.7.gpgcheck }}"
     enabled: "{{ item.value.OracleLinux.7.enabled }}"
-  loop: "{{ aspects_packages_add_repo_yum_repos|dict2items }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos|default({})|dict2items }}"
   tags:
     - aspects_packages
     - aspects_packages_add_repo_yum
