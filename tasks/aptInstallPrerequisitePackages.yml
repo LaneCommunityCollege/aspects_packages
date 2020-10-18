@@ -2,7 +2,7 @@
 - name: install Ubuntu 16.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
     state: "present"
@@ -17,7 +17,7 @@
 - name: install Ubuntu 18.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "present"
@@ -32,7 +32,7 @@
 - name: install Ubuntu 20.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
     state: "present"
@@ -62,7 +62,7 @@
 - name: install Ubuntu 16.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
     state: "latest"
@@ -77,7 +77,7 @@
 - name: install Ubuntu 18.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
     state: "latest"
@@ -92,7 +92,7 @@
 - name: install Ubuntu 20.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
     state: "latest"

@@ -92,7 +92,7 @@
 - name: install Ubuntu 20.04 packages with state latest
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
     pkg: "{{ aspects_packages_packages | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
     state: "latest"
