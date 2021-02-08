@@ -13,6 +13,7 @@
               | map(attribute='value.key_url.Ubuntu.1604')
               | list
           }}"
+  register: inprocess_task_result_key_url_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -31,6 +32,7 @@
               | map(attribute='value.key_url.Ubuntu.1804')
               | list
           }}"
+  register: inprocess_task_result_key_url_bionic
   tags:
   - aspects_packages
   - aspects_packages_add_repo_apt
@@ -49,6 +51,7 @@
               | map(attribute='value.key_url.Ubuntu.2004')
               | list
           }}"
+  register: inprocess_task_result_key_url_focal
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -67,6 +70,7 @@
               | map(attribute='value.key_url.Debian.9')
               | list
           }}"
+  register: inprocess_task_result_key_url_stretch
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -85,6 +89,7 @@
               | map(attribute='value.key_url.Debian.10')
               | list
           }}"
+  register: inprocess_task_result_key_url_buster
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -103,6 +108,7 @@
               | selectattr('value.keyserver.Ubuntu.1604', 'defined')
               | list
         }}"
+  register: inprocess_task_result_key_id_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -121,6 +127,7 @@
               | selectattr('value.keyserver.Ubuntu.1804', 'defined')
               | list
         }}"
+  register: inprocess_task_result_key_id_bionic
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -139,6 +146,7 @@
               | selectattr('value.keyserver.Ubuntu.2004', 'defined')
               | list
         }}"
+  register: inprocess_task_result_key_id_focal
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -157,6 +165,7 @@
               | selectattr('value.keyserver.Debian.9', 'defined')
               | list
         }}"
+  register: inprocess_task_result_key_id_stretch
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -175,6 +184,7 @@
               | selectattr('value.keyserver.Debian.10', 'defined')
               | list
         }}"
+  register: inprocess_task_result_key_id_buster
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -194,6 +204,7 @@
               | map(attribute='value.data.Ubuntu.1604')
               | list
           }}"
+  register: inprocess_task_result_key_data_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -212,6 +223,7 @@
               | map(attribute='value.data.Ubuntu.1804')
               | list
           }}"
+  register: inprocess_task_result_key_data_bionic
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -230,6 +242,7 @@
               | map(attribute='value.data.Ubuntu.2004')
               | list
           }}"
+  register: inprocess_task_result_key_data_focal
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -248,6 +261,7 @@
               | map(attribute='value.data.Debian.9')
               | list
           }}"
+  register: inprocess_task_result_key_data_stretch
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -266,6 +280,7 @@
               | map(attribute='value.data.Debian.10')
               | list
           }}"
+  register: inprocess_task_result_key_data_buster
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -283,6 +298,7 @@
               | map(attribute='value.repo.Ubuntu.1604')
               | list
           }}"
+  register: inprocess_task_result_repo_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -300,6 +316,7 @@
               | map(attribute='value.repo.Ubuntu.1804')
               | list
           }}"
+  register: inprocess_task_result_repo_bionic
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -317,6 +334,7 @@
               | map(attribute='value.repo.Ubuntu.2004')
               | list
           }}"
+  register: inprocess_task_result_repo_focal
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -334,6 +352,7 @@
               | map(attribute='value.repo.Debian.9')
               | list
           }}"
+  register: inprocess_task_result_repo_stretch
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -351,6 +370,35 @@
               | map(attribute='value.repo.Debian.10')
               | list
           }}"
+  register: inprocess_task_result_repo_buster
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: "Update apt cache when a new key and/or repo is added."
+  when: (
+    inprocess_task_result_key_url_xenial.changed
+    or inprocess_task_result_key_url_bionic.changed
+    or inprocess_task_result_key_url_focal.changed
+    or inprocess_task_result_key_url_stretch.changed
+    or inprocess_task_result_key_url_buster.changed
+    or inprocess_task_result_key_id_xenial.changed
+    or inprocess_task_result_key_id_bionic.changed
+    or inprocess_task_result_key_id_focal.changed
+    or inprocess_task_result_key_id_stretch.changed
+    or inprocess_task_result_key_id_buster.changed
+    or inprocess_task_result_key_data_xenial.changed
+    or inprocess_task_result_key_data_bionic.changed
+    or inprocess_task_result_key_data_focal.changed
+    or inprocess_task_result_key_data_stretch.changed
+    or inprocess_task_result_key_data_buster.changed
+    or inprocess_task_result_repo_xenial.changed
+    or inprocess_task_result_repo_bionic.changed
+    or inprocess_task_result_repo_focal.changed
+    or inprocess_task_result_repo_stretch.changed
+    or inprocess_task_result_repo_buster.changed
+    )
+  shell: "apt-get update"
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
