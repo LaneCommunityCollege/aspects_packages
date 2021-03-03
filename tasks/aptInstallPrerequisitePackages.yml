@@ -13,6 +13,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Ubuntu 18.04 prerequisite packages with state present
   when:
@@ -28,6 +30,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Ubuntu 20.04 prerequisite packages with state present
   when:
@@ -43,6 +47,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Debian 9 prerequisite packages with state present
   when:
@@ -58,6 +64,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Debian 10 prerequisite packages with state present
   when:
@@ -73,6 +81,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Ubuntu 16.04 prerequisite packages with state latest
   when:
@@ -88,6 +98,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Ubuntu 18.04 prerequisite packages with state latest
   when:
@@ -103,6 +115,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Ubuntu 20.04 prerequisite packages with state latest
   when:
@@ -118,6 +132,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Debian 9 prerequisite packages with state latest
   when:
@@ -133,6 +149,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: install Debian 10 prerequisite packages with state latest
   when:
@@ -148,6 +166,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_present
   when: inprocess_prerequisite_xenial_result_present.changed
@@ -157,6 +177,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_present
   when: inprocess_prerequisite_bionic_result_present.changed
@@ -166,6 +188,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_focal_result_present
   when: inprocess_prerequisite_focal_result_present.changed
@@ -175,6 +199,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_present
   when: inprocess_prerequisite_stretch_result_present.changed
@@ -184,6 +210,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_latest
   when: inprocess_prerequisite_xenial_result_latest.changed
@@ -193,6 +221,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_latest
   when: inprocess_prerequisite_bionic_result_latest.changed
@@ -202,6 +232,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_focal_result_latest
   when: inprocess_prerequisite_focal_result_latest.changed
@@ -211,6 +243,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_latest
   when: inprocess_prerequisite_stretch_result_latest.changed
@@ -220,6 +254,8 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_buster_result_latest
   when: inprocess_prerequisite_buster_result_latest.changed
@@ -229,4 +265,7 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
+
 ## End install aspects_packages_prerequisite_packages

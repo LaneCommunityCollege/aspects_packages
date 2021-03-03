@@ -149,6 +149,21 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
+- name: install Ubuntu 20.04 packages with state build-dep
+  when:
+    - ansible_lsb.codename == "focal"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
+  apt:
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'build-dep') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    state: "build-dep"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_focal_result_build-dep
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
 - name: Log list of packages when change occurs inprocess_xenial_result_present
   when: inprocess_xenial_result_present.changed
   debug:
@@ -234,6 +249,16 @@
   when: inprocess_buster_result_latest.changed
   debug:
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+
+- name: Log list of packages when change occurs inprocess_focal_result_build-dep
+  when: inprocess_focal_result_build-dep.changed
+  debug:
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'build-dep') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

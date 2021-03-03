@@ -10,7 +10,9 @@
   register: inprocess_prerequisite_centos7_result_present
   tags:
     - aspects_packages
+    - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_yum
     - aspects_packages_package_install_yum
 
 - name: yum - Install prerequisite packages on OracleLinux 7 state present
@@ -24,7 +26,9 @@
   register: inprocess_prerequisite_oraclelinux7_result_present
   tags:
     - aspects_packages
+    - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_yum
     - aspects_packages_package_install_yum
 
 - name: yum - Install prerequisite packages on CentOS 7 state latest
@@ -38,7 +42,9 @@
   register: inprocess_prerequisite_centos7_result_latest
   tags:
     - aspects_packages
+    - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_yum
     - aspects_packages_package_install_yum
 
 
@@ -53,7 +59,9 @@
   register: inprocess_prerequisite_oraclelinux7_result_latest
   tags:
     - aspects_packages
+    - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_yum
     - aspects_packages_package_install_yum
 
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_present

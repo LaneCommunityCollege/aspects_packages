@@ -10,8 +10,8 @@
   register: inprocess_xenial_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Ubuntu 18.04 packages with state absent 
   when:
@@ -23,8 +23,8 @@
   register: inprocess_bionic_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Ubuntu 20.04 packages with state absent
   when:
@@ -36,8 +36,8 @@
   register: inprocess_focal_result_absent
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Debian 9 packages with state absent 
   when:
@@ -49,8 +49,8 @@
   register: inprocess_stretch_result_absent 
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Debian 10 packages with state absent
   when:
@@ -62,8 +62,8 @@
   register: inprocess_buster_result_absent
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Ubuntu 16.04 packages with state purged
   when:
@@ -76,8 +76,8 @@
   register: inprocess_xenial_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Ubuntu 18.04 packages with state purged
   when:
@@ -90,8 +90,8 @@
   register: inprocess_bionic_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Ubuntu 20.04 packages with state purged
   when:
@@ -104,8 +104,8 @@
   register: inprocess_focal_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Debian 9 packages with state purged
   when:
@@ -118,8 +118,8 @@
   register: inprocess_stretch_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: remove Debian 10 packages with state purged
   when:
@@ -132,8 +132,8 @@
   register: inprocess_buster_result_purged
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_xenial_result_absent 
   when: inprocess_xenial_result_absent.changed
@@ -141,8 +141,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_bionic_result_absent 
   when: inprocess_bionic_result_absent.changed
@@ -150,8 +150,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_focal_result_absent
   when: inprocess_focal_result_absent.changed
@@ -159,8 +159,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_stretch_result_absent 
   when: inprocess_stretch_result_absent.changed
@@ -168,8 +168,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_buster_result_absent
   when: inprocess_buster_result_absent.changed
@@ -177,8 +177,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_xenial_result_purged
   when: inprocess_xenial_result_purged.changed
@@ -186,8 +186,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_bionic_result_purged
   when: inprocess_bionic_result_purged.changed
@@ -195,8 +195,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_focal_result_purged
   when: inprocess_focal_result_purged.changed
@@ -204,8 +204,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_stretch_result_purged
   when: inprocess_stretch_result_purged.changed
@@ -213,8 +213,8 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: Log list of packages when change occurs inprocess_buster_result_purged
   when: inprocess_buster_result_purged.changed
@@ -222,6 +222,6 @@
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
   tags:
     - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 ## End remove aspects_packages_packages

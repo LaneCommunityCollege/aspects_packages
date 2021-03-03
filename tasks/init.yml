@@ -5,7 +5,10 @@
   include_tasks: "aptRemovePrerequisitePackages.yml"
   tags:
     - aspects_packages
+    - aspects_packages_package_remove
     - aspects_packages_prerequisite_package_remove
+    - aspects_packages_prerequisite_package_remove_apt
+    - aspects_packages_package_remove_apt
 
 - name: "YUM - remove prerequisite packages"
   when:
@@ -13,7 +16,10 @@
   include_tasks: "yumRemovePrerequisitePackages.yml"
   tags:
     - aspects_packages
+    - aspects_packages_package_remove
     - aspects_packages_prerequisite_package_remove
+    - aspects_packages_prerequisite_package_remove_yum
+    - aspects_packages_package_remove_yum
 
 - name: "APT - remove packages"
   when:
@@ -22,6 +28,7 @@
   tags:
     - aspects_packages
     - aspects_packages_package_remove
+    - aspects_packages_package_remove_apt
 
 - name: "YUM - remove packages"
   when:
@@ -30,6 +37,7 @@
   tags:
     - aspects_packages
     - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
 
 - name: "APT - install prerequisite packages"
   when:
@@ -37,7 +45,10 @@
   include_tasks: "aptInstallPrerequisitePackages.yml"
   tags:
     - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_apt
 
 - name: "YUM - install prerequisite packages"
   when:
@@ -45,7 +56,10 @@
   include_tasks: "yumInstallPrerequisitePackages.yml"
   tags:
     - aspects_packages
+    - aspects_packages_package_install
     - aspects_packages_prerequisite_package_install
+    - aspects_packages_prerequisite_package_install_yum
+    - aspects_packages_package_install_yum
 
 - name: "APT - add repositories"
   when:
@@ -72,6 +86,7 @@
   tags:
     - aspects_packages
     - aspects_packages_package_install
+    - aspects_packages_package_install_apt
 
 - name: "YUM - install packages"
   when:
@@ -80,4 +95,5 @@
   tags:
     - aspects_packages
     - aspects_packages_package_install
+    - aspects_packages_package_install_yum
 
