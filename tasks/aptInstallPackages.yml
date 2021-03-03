@@ -158,7 +158,7 @@
     state: "build-dep"
     update_cache: "yes"
     cache_valid_time: "14400"
-  register: inprocess_focal_result_build-dep
+  register: inprocess_focal_result_build_dep
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -255,8 +255,8 @@
     - aspects_packages_package_install_apt
 
 
-- name: Log list of packages when change occurs inprocess_focal_result_build-dep
-  when: inprocess_focal_result_build-dep.changed
+- name: Log list of packages when change occurs inprocess_focal_result_build_dep
+  when: inprocess_focal_result_build_dep.changed
   debug:
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'build-dep') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
   tags:
