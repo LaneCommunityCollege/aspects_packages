@@ -1,4 +1,62 @@
 ---
+- name: "APT - Ubuntu - Template /etc/apt/sources.list"
+  when:
+    - ansible_pkg_mgr == "apt"
+    - ( ansible_lsb.codename == "bionic"
+        or ansible_lsb.codename == "focal"
+        or ansible_lsb.codename == "xenial" )
+    - ( aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_src.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_src.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_src.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_src.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_src_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_src_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_src_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_src_updates.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_src_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_src_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_src_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_src_backports.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_src_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted_src_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_universe_src_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_src_security.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_partner.enabled
+        or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_multiverse_src_partner.enabled )
+  template:
+    src: "etc-apt-sources.list.j2"
+    dest: "/etc/apt/sources.list"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  tags:
+    - aspects_packages
+
+- name: "APT - add repositories"
+  when:
+    - ansible_pkg_mgr == "apt"
+    - aspects_packages_add_repo_apt_repos is defined
+  include_tasks: "aptAddRepository.yml"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: "APT - remove prerequisite packages"
   when:
     - ansible_pkg_mgr == "apt"
@@ -46,15 +104,6 @@
   tags:
     - aspects_packages
     - aspects_packages_prerequisite_package_install
-
-- name: "APT - add repositories"
-  when:
-    - ansible_pkg_mgr == "apt"
-    - aspects_packages_add_repo_apt_repos is defined
-  include_tasks: "aptAddRepository.yml"
-  tags:
-    - aspects_packages
-    - aspects_packages_add_repo_apt
 
 - name: "YUM - add repositories"
   when:
