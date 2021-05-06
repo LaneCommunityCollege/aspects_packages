@@ -5,7 +5,7 @@
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7"
   yum:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_centos7_result_absent
   tags:
@@ -18,7 +18,7 @@
     - ansible_distribution == "OracleLinux"
     - ansible_distribution_major_version == "7"
   yum:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_oraclelinux7_result_absent
   tags:
@@ -31,7 +31,7 @@
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7"
   yum:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_centos7_result_purged
   tags:
@@ -44,7 +44,7 @@
     - ansible_distribution == "OracleLinux"
     - ansible_distribution_major_version == "7"
   yum:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_oraclelinux7_result_purged
   tags:
@@ -55,7 +55,7 @@
 - name: Log list of packages when change occurs inprocess_prerequisite_centos7_result_absent
   when: inprocess_prerequisite_centos7_result_absent.changed
   debug:
-    msg:  "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    msg:  "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
@@ -64,7 +64,7 @@
 - name: Log list of packages when change occurs inproinprocess_prerequisite_oraclelinux7_result_absent
   when: inprocess_prerequisite_oraclelinux7_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
@@ -73,7 +73,7 @@
 - name: Log list of packages when change occurs inprocess_prerequisite_centos7_result_purged
   when: inprocess_prerequisite_centos7_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.CentOS.7', 'defined') | list | map(attribute='value.CentOS.7') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
@@ -82,7 +82,7 @@
 - name: Log list of packages when change occurs inproinprocess_prerequisite_oraclelinux7_result_purged
   when: inprocess_prerequisite_oraclelinux7_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_remove

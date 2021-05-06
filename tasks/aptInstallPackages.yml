@@ -4,7 +4,7 @@
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -19,7 +19,7 @@
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -34,7 +34,7 @@
     - ansible_lsb.codename == "focal"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -49,7 +49,7 @@
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -64,7 +64,7 @@
     - ansible_lsb.codename == "buster"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -79,7 +79,7 @@
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -94,7 +94,7 @@
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -109,7 +109,7 @@
     - ansible_lsb.codename == "focal"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -124,7 +124,7 @@
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -139,7 +139,7 @@
     - ansible_lsb.codename == "buster"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
@@ -152,7 +152,7 @@
 - name: Log list of packages when change occurs inprocess_xenial_result_present
   when: inprocess_xenial_result_present.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -161,7 +161,7 @@
 - name: Log list of packages when change occurs inprocess_bionic_result_present
   when: inprocess_bionic_result_present.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -170,7 +170,7 @@
 - name: Log list of packages when change occurs inprocess_focal_result_present
   when: inprocess_focal_result_present.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -179,7 +179,7 @@
 - name: Log list of packages when change occurs inprocess_stretch_result_present
   when: inprocess_stretch_result_present.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -188,7 +188,7 @@
 - name: Log list of packages when change occurs inprocess_buster_result_present
   when: inprocess_buster_result_present.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -197,7 +197,7 @@
 - name: Log list of packages when change occurs inprocess_xenial_result_latest
   when: inprocess_xenial_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -206,7 +206,7 @@
 - name: Log list of packages when change occurs inprocess_bionic_result_latest
   when: inprocess_bionic_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -215,7 +215,7 @@
 - name: Log list of packages when change occurs inprocess_focal_result_latest
   when: inprocess_focal_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -224,7 +224,7 @@
 - name: Log list of packages when change occurs inprocess_stretch_result_latest
   when: inprocess_stretch_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -233,7 +233,7 @@
 - name: Log list of packages when change occurs inprocess_buster_result_latest
   when: inprocess_buster_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

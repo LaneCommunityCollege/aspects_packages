@@ -5,7 +5,7 @@
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_xenial_result_absent
   tags:
@@ -18,7 +18,7 @@
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_bionic_result_absent
   tags:
@@ -31,7 +31,7 @@
     - ansible_lsb.codename == "focal"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_focal_result_absent
   tags:
@@ -44,7 +44,7 @@
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_stretch_result_absent
   tags:
@@ -57,7 +57,7 @@
     - ansible_lsb.codename == "buster"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
     state: "absent"
   register: inprocess_prerequisite_buster_result_absent
   tags:
@@ -70,7 +70,7 @@
     - ansible_lsb.codename == "xenial"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
     state: "absent"
     purge: "yes"
   register: inprocess_prerequisite_xenial_result_purged
@@ -84,7 +84,7 @@
     - ansible_lsb.codename == "bionic"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "absent"
     purge: "yes"
   register: inprocess_prerequisite_bionic_result_purged
@@ -98,7 +98,7 @@
     - ansible_lsb.codename == "focal"
     - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "absent"
     purge: "yes"
   register: inprocess_prerequisite_focal_result_purged
@@ -112,7 +112,7 @@
     - ansible_lsb.codename == "stretch"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
     state: "absent"
     purge: "yes"
   register: inprocess_prerequisite_stretch_result_purged
@@ -126,7 +126,7 @@
     - ansible_lsb.codename == "buster"
     - ansible_lsb.id == "Debian"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
     state: "absent"
     purge: "yes"
   register: inprocess_prerequisite_buster_result_purged
@@ -138,7 +138,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_absent
   when: inprocess_prerequisite_xenial_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -147,7 +147,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_absent
   when: inprocess_prerequisite_bionic_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -156,7 +156,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_focal_result_absent
   when: inprocess_prerequisite_focal_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -165,7 +165,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_absent
   when: inprocess_prerequisite_stretch_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -174,7 +174,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_buster_result_absent
   when: inprocess_prerequisite_buster_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -183,7 +183,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_purged
   when: inprocess_prerequisite_xenial_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -192,7 +192,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_purged
   when: inprocess_prerequisite_bionic_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -201,7 +201,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_focal_result_purged
   when: inprocess_prerequisite_focal_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -210,7 +210,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_purged
   when: inprocess_prerequisite_stretch_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -219,7 +219,7 @@
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_buster_result_purged
   when: inprocess_prerequisite_buster_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

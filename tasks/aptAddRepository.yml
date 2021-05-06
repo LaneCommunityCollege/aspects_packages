@@ -87,7 +87,7 @@
               | selectattr('value.key_url.Debian.10', 'defined')
               | list
               | map(attribute='value.key_url.Debian.10')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_url_buster
   tags:
@@ -106,7 +106,7 @@
               | selectattr('value.enabled', 'eq', True)
               | selectattr('value.key_id.Ubuntu.1604', 'defined')
               | selectattr('value.keyserver.Ubuntu.1604', 'defined')
-              | list
+              | list | sort
         }}"
   register: inprocess_task_result_key_id_xenial
   tags:
@@ -125,7 +125,7 @@
               | selectattr('value.enabled', 'eq', True)
               | selectattr('value.key_id.Ubuntu.1804', 'defined')
               | selectattr('value.keyserver.Ubuntu.1804', 'defined')
-              | list
+              | list | sort
         }}"
   register: inprocess_task_result_key_id_bionic
   tags:
@@ -144,7 +144,7 @@
               | selectattr('value.enabled', 'eq', True)
               | selectattr('value.key_id.Ubuntu.2004', 'defined')
               | selectattr('value.keyserver.Ubuntu.2004', 'defined')
-              | list
+              | list | sort
         }}"
   register: inprocess_task_result_key_id_focal
   tags:
@@ -163,7 +163,7 @@
               | selectattr('value.enabled', 'eq', True)
               | selectattr('value.key_id.Debian.9', 'defined')
               | selectattr('value.keyserver.Debian.9', 'defined')
-              | list
+              | list | sort
         }}"
   register: inprocess_task_result_key_id_stretch
   tags:
@@ -182,7 +182,7 @@
               | selectattr('value.enabled', 'eq', True)
               | selectattr('value.key_id.Debian.10', 'defined')
               | selectattr('value.keyserver.Debian.10', 'defined')
-              | list
+              | list | sort
         }}"
   register: inprocess_task_result_key_id_buster
   tags:
@@ -202,7 +202,7 @@
               | selectattr('value.data.Ubuntu.1604', 'defined')
               | list
               | map(attribute='value.data.Ubuntu.1604')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_data_xenial
   tags:
@@ -221,7 +221,7 @@
               | selectattr('value.data.Ubuntu.1804', 'defined')
               | list
               | map(attribute='value.data.Ubuntu.1804')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_data_bionic
   tags:
@@ -240,7 +240,7 @@
               | selectattr('value.data.Ubuntu.2004', 'defined')
               | list
               | map(attribute='value.data.Ubuntu.2004')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_data_focal
   tags:
@@ -259,7 +259,7 @@
               | selectattr('value.data.Debian.9', 'defined')
               | list
               | map(attribute='value.data.Debian.9')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_data_stretch
   tags:
@@ -278,7 +278,7 @@
               | selectattr('value.data.Debian.10', 'defined')
               | list
               | map(attribute='value.data.Debian.10')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_key_data_buster
   tags:
@@ -296,7 +296,7 @@
               | selectattr('value.repo.Ubuntu.1604', 'defined')
               | list
               | map(attribute='value.repo.Ubuntu.1604')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_repo_xenial
   tags:
@@ -314,7 +314,7 @@
               | selectattr('value.repo.Ubuntu.1804', 'defined')
               | list
               | map(attribute='value.repo.Ubuntu.1804')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_repo_bionic
   tags:
@@ -332,7 +332,7 @@
               | selectattr('value.repo.Ubuntu.2004', 'defined')
               | list
               | map(attribute='value.repo.Ubuntu.2004')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_repo_focal
   tags:
@@ -350,7 +350,7 @@
               | selectattr('value.repo.Debian.9', 'defined')
               | list
               | map(attribute='value.repo.Debian.9')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_repo_stretch
   tags:
@@ -368,7 +368,7 @@
               | selectattr('value.repo.Debian.10', 'defined')
               | list
               | map(attribute='value.repo.Debian.10')
-              | list
+              | list | sort
           }}"
   register: inprocess_task_result_repo_buster
   tags:
