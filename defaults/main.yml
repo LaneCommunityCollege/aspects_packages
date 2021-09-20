@@ -229,13 +229,13 @@ aspects_packages_add_repo_apt_repos:
     enabled: False
     repo:
       Ubuntu:
-#        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial partner"
-        1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic partner"
-        2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal partner"
+        1604: "deb http://archive.canonical.com/ubuntu xenial partner"
+        1804: "deb http://archive.canonical.com/ubuntu bionic partner"
+        2004: "deb http://archive.canonical.com/ubuntu focal partner"
   ubuntu_official_mirrors_multiverse_src_partner:
     enabled: False
     repo:
       Ubuntu:
-#        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial partner"
-        1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic partner"
-        2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal partner"
+        1604: "deb-src http://archive.canonical.com/ubuntu xenial partner"
+        1804: "deb-src http://archive.canonical.com/ubuntu bionic partner"
+        2004: "deb-src http://archive.canonical.com/ubuntu focal partner"
