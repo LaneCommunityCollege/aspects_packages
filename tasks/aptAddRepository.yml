@@ -1,23 +1,4 @@
 ---
-- name: Ubuntu 16.04 - apt - Add keys for repos using direct url
-  when:
-    - ansible_lsb.codename == "xenial"
-  apt_key:
-    state: "present"
-    url: "{{ item }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos
-              | default({}) | dict2items
-              | selectattr('value.enabled', 'eq', True)
-              | selectattr('value.key_url.Ubuntu.1604', 'defined')
-              | list
-              | map(attribute='value.key_url.Ubuntu.1604')
-              | list
-          }}"
-  register: inprocess_task_result_key_url_xenial
-  tags:
-    - aspects_packages
-    - aspects_packages_add_repo_apt
-
 - name: Ubuntu 18.04 - apt - Add keys for repos using direct url
   when:
     - ansible_lsb.codename == "bionic"
@@ -90,25 +71,6 @@
               | list | sort
           }}"
   register: inprocess_task_result_key_url_buster
-  tags:
-    - aspects_packages
-    - aspects_packages_add_repo_apt
-
-- name: Ubuntu 16.04 - apt - Add keys for repos using keyserver and id.
-  when:
-    - ansible_lsb.codename == "xenial"
-  apt_key:
-    state: "present"
-    keyserver: "{{ item.value.keyserver.Ubuntu.1604 }}"
-    id: "{{ item.value.key_id.Ubuntu.1604 }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos
-              | default({}) | dict2items
-              | selectattr('value.enabled', 'eq', True)
-              | selectattr('value.key_id.Ubuntu.1604', 'defined')
-              | selectattr('value.keyserver.Ubuntu.1604', 'defined')
-              | list | sort
-        }}"
-  register: inprocess_task_result_key_id_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -189,26 +151,6 @@
     - aspects_packages
     - aspects_packages_add_repo_apt
 
-
-- name: Ubuntu 16.04 - apt - Add keys for repos using data
-  when:
-    - ansible_lsb.codename == "xenial"
-  apt_key:
-    state: "present"
-    data: "{{ item }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos
-              | default({}) | dict2items
-              | selectattr('value.enabled', 'eq', True)
-              | selectattr('value.data.Ubuntu.1604', 'defined')
-              | list
-              | map(attribute='value.data.Ubuntu.1604')
-              | list | sort
-          }}"
-  register: inprocess_task_result_key_data_xenial
-  tags:
-    - aspects_packages
-    - aspects_packages_add_repo_apt
-
 - name: Ubuntu 18.04 - apt - Add keys for repos using data
   when:
     - ansible_lsb.codename == "bionic"
@@ -281,24 +223,6 @@
               | list | sort
           }}"
   register: inprocess_task_result_key_data_buster
-  tags:
-    - aspects_packages
-    - aspects_packages_add_repo_apt
-
-- name: Ubuntu 16.04 - apt - Add extra repos
-  when:
-    - ansible_lsb.codename == "xenial"
-  apt_repository:
-    repo: "{{ item }}"
-  loop: "{{ aspects_packages_add_repo_apt_repos
-              | default({}) | dict2items
-              | selectattr('value.enabled', 'eq', True)
-              | selectattr('value.repo.Ubuntu.1604', 'defined')
-              | list
-              | map(attribute='value.repo.Ubuntu.1604')
-              | list | sort
-          }}"
-  register: inprocess_task_result_repo_xenial
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -377,22 +301,18 @@
 
 - name: "Update apt cache when a new key and/or repo is added."
   when: (
-    inprocess_task_result_key_url_xenial.changed
-    or inprocess_task_result_key_url_bionic.changed
+    inprocess_task_result_key_url_bionic.changed
     or inprocess_task_result_key_url_focal.changed
     or inprocess_task_result_key_url_stretch.changed
     or inprocess_task_result_key_url_buster.changed
-    or inprocess_task_result_key_id_xenial.changed
     or inprocess_task_result_key_id_bionic.changed
     or inprocess_task_result_key_id_focal.changed
     or inprocess_task_result_key_id_stretch.changed
     or inprocess_task_result_key_id_buster.changed
-    or inprocess_task_result_key_data_xenial.changed
     or inprocess_task_result_key_data_bionic.changed
     or inprocess_task_result_key_data_focal.changed
     or inprocess_task_result_key_data_stretch.changed
     or inprocess_task_result_key_data_buster.changed
-    or inprocess_task_result_repo_xenial.changed
     or inprocess_task_result_repo_bionic.changed
     or inprocess_task_result_repo_focal.changed
     or inprocess_task_result_repo_stretch.changed

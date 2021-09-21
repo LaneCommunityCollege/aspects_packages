@@ -1,19 +1,4 @@
 ## Start install aspects_packages_prerequisite_packages
-- name: install Ubuntu 16.04 prerequisite packages with state present
-  when:
-    - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
-  apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
-    state: "present"
-    update_cache: "yes"
-    cache_valid_time: "14400"
-  register: inprocess_prerequisite_xenial_result_present
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
 - name: install Ubuntu 18.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "bionic"
@@ -69,21 +54,6 @@
     update_cache: "yes"
     cache_valid_time: "14400"
   register: inprocess_prerequisite_buster_result_present
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
-- name: install Ubuntu 16.04 prerequisite packages with state latest
-  when:
-    - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
-  apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
-    state: "latest"
-    update_cache: "yes"
-    cache_valid_time: "14400"
-  register: inprocess_prerequisite_xenial_result_latest
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -149,15 +119,6 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_present
-  when: inprocess_prerequisite_xenial_result_present.changed
-  debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_present
   when: inprocess_prerequisite_bionic_result_present.changed
   debug:
@@ -180,15 +141,6 @@
   when: inprocess_prerequisite_stretch_result_present.changed
   debug:
     msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
-- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_xenial_result_latest
-  when: inprocess_prerequisite_xenial_result_latest.changed
-  debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

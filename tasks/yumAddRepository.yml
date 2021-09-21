@@ -4,16 +4,16 @@
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7"
   yum_repository:
-    state: "{{ item.value.CentOS.7.state }}"
-    name: "{{ item.value.CentOS.7.name }}"
-    description: "{{ item.value.CentOS.7.description }}"
-    gpgkey: "{{ item.value.CentOS.7.gpgkey }}"
-    baseurl: "{{ item.value.CentOS.7.baseurl }}"
-    sslverify: "{{ item.value.CentOS.7.sslverify }}"
-    repo_gpgcheck: "{{ item.value.CentOS.7.repo_gpgcheck }}"
-    gpgcheck: "{{ item.value.CentOS.7.gpgcheck }}"
-    enabled: "{{ item.value.CentOS.7.enabled }}"
-  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dict2items | sort }}"
+    state: "{{ item.1.CentOS.7.state }}"
+    name: "{{ item.1.CentOS.7.name }}"
+    description: "{{ item.1.CentOS.7.description }}"
+    gpgkey: "{{ item.1.CentOS.7.gpgkey }}"
+    baseurl: "{{ item.1.CentOS.7.baseurl }}"
+    sslverify: "{{ item.1.CentOS.7.sslverify }}"
+    repo_gpgcheck: "{{ item.1.CentOS.7.repo_gpgcheck }}"
+    gpgcheck: "{{ item.1.CentOS.7.gpgcheck }}"
+    enabled: "{{ item.1.CentOS.7.enabled }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dictsort }}"
   tags:
   - aspects_packages
   - aspects_packages_add_repo_yum
@@ -23,16 +23,16 @@
       - ansible_distribution == "OracleLinux"
       - ansible_distribution_major_version == "7"
   yum_repository:
-    state: "{{ item.value.OracleLinux.7.state }}"
-    name: "{{ item.value.OracleLinux.7.name }}"
-    description: "{{ item.value.OracleLinux.7.description }}"
-    gpgkey: "{{ item.value.OracleLinux.7.gpgkey }}"
-    baseurl: "{{ item.value.OracleLinux.7.baseurl }}"
-    sslverify: "{{ item.value.OracleLinux.7.sslverify }}"
-    repo_gpgcheck: "{{ item.value.OracleLinux.7.repo_gpgcheck }}"
-    gpgcheck: "{{ item.value.OracleLinux.7.gpgcheck }}"
-    enabled: "{{ item.value.OracleLinux.7.enabled }}"
-  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dict2items | sort }}"
+    state: "{{ item.1.OracleLinux.7.state }}"
+    name: "{{ item.1.OracleLinux.7.name }}"
+    description: "{{ item.1.OracleLinux.7.description }}"
+    gpgkey: "{{ item.1.OracleLinux.7.gpgkey }}"
+    baseurl: "{{ item.1.OracleLinux.7.baseurl }}"
+    sslverify: "{{ item.1.OracleLinux.7.sslverify }}"
+    repo_gpgcheck: "{{ item.1.OracleLinux.7.repo_gpgcheck }}"
+    gpgcheck: "{{ item.1.OracleLinux.7.gpgcheck }}"
+    enabled: "{{ item.1.OracleLinux.7.enabled }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dictsort }}"
   tags:
     - aspects_packages
     - aspects_packages_add_repo_yum

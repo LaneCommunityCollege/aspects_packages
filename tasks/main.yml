@@ -7,3 +7,4 @@
   tags:
   - aspects_packages
   - aspects_packages_add_repo_apt
+  - aspects_packages_add_repo_yum

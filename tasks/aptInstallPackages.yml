@@ -1,19 +1,4 @@
 ---
-- name: install Ubuntu 16.04 packages with state present
-  when:
-    - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu"
-  apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
-    state: "present"
-    update_cache: "yes"
-    cache_valid_time: "14400"
-  register: inprocess_xenial_result_present
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
 - name: install Ubuntu 18.04 packages with state present
   when:
     - ansible_lsb.codename == "bionic"
@@ -69,21 +54,6 @@
     update_cache: "yes"
     cache_valid_time: "14400"
   register: inprocess_buster_result_present
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
-- name: install Ubuntu 16.04 packages with state latest
-  when:
-    - ansible_lsb.codename == "xenial"
-    - ansible_lsb.id == "Ubuntu"
-  apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
-    state: "latest"
-    update_cache: "yes"
-    cache_valid_time: "14400"
-  register: inprocess_xenial_result_latest
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -149,15 +119,6 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of packages when change occurs inprocess_xenial_result_present
-  when: inprocess_xenial_result_present.changed
-  debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
 - name: Log list of packages when change occurs inprocess_bionic_result_present
   when: inprocess_bionic_result_present.changed
   debug:
@@ -189,15 +150,6 @@
   when: inprocess_buster_result_present.changed
   debug:
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
-  tags:
-    - aspects_packages
-    - aspects_packages_package_install
-    - aspects_packages_package_install_apt
-
-- name: Log list of packages when change occurs inprocess_xenial_result_latest
-  when: inprocess_xenial_result_latest.changed
-  debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1604', 'defined') | list | map(attribute='value.Ubuntu.1604') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

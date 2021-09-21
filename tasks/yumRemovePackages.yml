@@ -1,6 +1,4 @@
 ---
-
-
 ## Start remove packages
 - name: yum - Remove packages on CentOS 7 state absent
   when:
