@@ -3,11 +3,11 @@
 - name: remove Ubuntu 18.04 packages with state absent
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "absent"
-  register: inprocess_bionic_result_absent 
+  register: inprocess_bionic_result_absent
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -16,7 +16,7 @@
 - name: remove Ubuntu 20.04 packages with state absent
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "absent"
@@ -26,14 +26,14 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: remove Debian 9 packages with state absent 
+- name: remove Ubuntu 22.04 packages with state absent
   when:
-    - ansible_lsb.codename == "stretch"
-    - ansible_lsb.id == "Debian"
+    - ansible_lsb.codename == "jammy"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
     state: "absent"
-  register: inprocess_stretch_result_absent 
+  register: inprocess_jammy_result_absent
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -55,7 +55,7 @@
 - name: remove Ubuntu 18.04 packages with state purged
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "absent"
@@ -69,7 +69,7 @@
 - name: remove Ubuntu 20.04 packages with state purged
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "absent"
@@ -80,15 +80,15 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: remove Debian 9 packages with state purged
+- name: remove Ubuntu 22.04 packages with state purged
   when:
-    - ansible_lsb.codename == "stretch"
-    - ansible_lsb.id == "Debian"
+    - ansible_lsb.codename == "jammy"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
     state: "absent"
     purge: "yes"
-  register: inprocess_stretch_result_purged
+  register: inprocess_jammy_result_purged
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -126,10 +126,10 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of packages when change occurs inprocess_stretch_result_absent 
-  when: inprocess_stretch_result_absent.changed
+- name: Log list of packages when change occurs inprocess_jammy_result_absent
+  when: inprocess_jammy_result_absent.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent ') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -162,10 +162,10 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of packages when change occurs inprocess_stretch_result_purged
-  when: inprocess_stretch_result_purged.changed
+- name: Log list of packages when change occurs inprocess_jammy_result_purged
+  when: inprocess_jammy_result_purged.changed
   debug:
-    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

@@ -2,7 +2,7 @@
 - name: install Ubuntu 18.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "present"
@@ -17,7 +17,7 @@
 - name: install Ubuntu 20.04 prerequisite packages with state present
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "present"
@@ -29,16 +29,16 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: install Debian 9 prerequisite packages with state present
+- name: install Ubuntu 22.04 prerequisite packages with state present
   when:
-    - ansible_lsb.codename == "stretch"
-    - ansible_lsb.id == "Debian"
+    - ansible_lsb.codename == "jammy"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
     state: "present"
     update_cache: "yes"
     cache_valid_time: "14400"
-  register: inprocess_prerequisite_stretch_result_present
+  register: inprocess_prerequisite_jammy_result_present
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -62,7 +62,7 @@
 - name: install Ubuntu 18.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "bionic"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.1804', 'defined') | list | map(attribute='value.Ubuntu.1804') | list | sort }}"
     state: "latest"
@@ -77,7 +77,7 @@
 - name: install Ubuntu 20.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "focal"
-    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop" 
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
     pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2004', 'defined') | list | map(attribute='value.Ubuntu.2004') | list | sort }}"
     state: "latest"
@@ -89,16 +89,16 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: install Debian 9 prerequisite packages with state latest
+- name: install Ubuntu 22.04 prerequisite packages with state latest
   when:
-    - ansible_lsb.codename == "stretch"
-    - ansible_lsb.id == "Debian"
+    - ansible_lsb.codename == "jammy"
+    - ansible_lsb.id == "Ubuntu" or ansible_lsb.id == "Pop"
   apt:
-    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
     state: "latest"
     update_cache: "yes"
     cache_valid_time: "14400"
-  register: inprocess_prerequisite_stretch_result_latest
+  register: inprocess_prerequisite_jammy_result_latest
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -137,10 +137,10 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_present
-  when: inprocess_prerequisite_stretch_result_present.changed
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_jammy_result_present
+  when: inprocess_prerequisite_jammy_result_present.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -164,10 +164,10 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
-- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_stretch_result_latest
-  when: inprocess_prerequisite_stretch_result_latest.changed
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_jammy_result_latest
+  when: inprocess_prerequisite_jammy_result_latest.changed
   debug:
-    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.9', 'defined') | list | map(attribute='value.Debian.9') | list | sort }}"
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

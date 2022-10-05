@@ -5,237 +5,237 @@ aspects_packages_add_repo_apt_repos:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic main"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal main"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy main"
   ubuntu_official_mirrors_main_src:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial main"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic main"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal main"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy main"
   ubuntu_official_mirrors_restricted:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial restricted"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic restricted"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal restricted"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy restricted"
   ubuntu_official_mirrors_restricted_src:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial restricted"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic restricted"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal restricted"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy restricted"
   ubuntu_official_mirrors_universe:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial universe"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic universe"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal universe"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy universe"
   ubuntu_official_mirrors_universe_src:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial universe"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic universe"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal universe"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy universe"
   ubuntu_official_mirrors_multiverse:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial multiverse"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic multiverse"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal multiverse"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy multiverse"
   ubuntu_official_mirrors_multiverse_src:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial multiverse"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic multiverse"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal multiverse"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy multiverse"
   ubuntu_official_mirrors_main_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates main"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates main"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates main"
   ubuntu_official_mirrors_main_src_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates main"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-updates main"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates main"
   ubuntu_official_mirrors_restricted_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates restricted"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates restricted"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates restricted"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates restricted"
   ubuntu_official_mirrors_restricted_src_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates restricted"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates restricted"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-updates restricted"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates restricted"
   ubuntu_official_mirrors_universe_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates universe"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates universe"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates universe"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates universe"
   ubuntu_official_mirrors_universe_src_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates universe"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates universe"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-updates universe"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates universe"
   ubuntu_official_mirrors_multiverse_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates multiverse"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates multiverse"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-updates multiverse"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates multiverse"
   ubuntu_official_mirrors_multiverse_src_updates:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates multiverse"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates multiverse"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-updates multiverse"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-updates multiverse"
   ubuntu_official_mirrors_main_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports main"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports main"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports main"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports main"
   ubuntu_official_mirrors_main_src_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports main"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports main"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-backports main"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports main"
   ubuntu_official_mirrors_restricted_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports restricted"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports restricted"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports restricted"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports restricted"
   ubuntu_official_mirrors_restricted_src_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports restricted"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports restricted"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-backports restricted"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports restricted"
   ubuntu_official_mirrors_universe_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports universe"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports universe"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports universe"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports universe"
   ubuntu_official_mirrors_universe_src_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports universe"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports universe"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-backports universe"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports universe"
   ubuntu_official_mirrors_multiverse_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports multiverse"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports multiverse"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-backports multiverse"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports multiverse"
   ubuntu_official_mirrors_multiverse_src_backports:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports multiverse"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports multiverse"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-backports multiverse"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-backports multiverse"
   ubuntu_official_mirrors_main_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security main"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security main"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security main"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-security main"
   ubuntu_official_mirrors_main_src_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-security main"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-security main"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-security main"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-security main"
   ubuntu_official_mirrors_restricted_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security restricted"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security restricted"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security restricted"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-security restricted"
   ubuntu_official_mirrors_restricted_src_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-security restricted"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-security restricted"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-security restricted"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-security restricted"
   ubuntu_official_mirrors_universe_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security universe"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security universe"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security universe"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-security universe"
   ubuntu_official_mirrors_universe_src_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-security universe"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-security universe"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-security universe"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-security universe"
   ubuntu_official_mirrors_multiverse_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security multiverse"
         1804: "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security multiverse"
         2004: "deb mirror://mirrors.ubuntu.com/mirrors.txt focal-security multiverse"
+        2204: "deb mirror://mirrors.ubuntu.com/mirrors.txt jammy-security multiverse"
   ubuntu_official_mirrors_multiverse_src_security:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt xenial-security multiverse"
         1804: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt bionic-security multiverse"
         2004: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt focal-security multiverse"
+        2204: "deb-src mirror://mirrors.ubuntu.com/mirrors.txt jammy-security multiverse"
   ubuntu_official_mirrors_multiverse_partner:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb http://archive.canonical.com/ubuntu xenial partner"
         1804: "deb http://archive.canonical.com/ubuntu bionic partner"
         2004: "deb http://archive.canonical.com/ubuntu focal partner"
+        2204: "deb http://archive.canonical.com/ubuntu jammy partner"
   ubuntu_official_mirrors_multiverse_src_partner:
     enabled: False
     repo:
       Ubuntu:
-        1604: "deb-src http://archive.canonical.com/ubuntu xenial partner"
         1804: "deb-src http://archive.canonical.com/ubuntu bionic partner"
         2004: "deb-src http://archive.canonical.com/ubuntu focal partner"
+        2204: "deb-src http://archive.canonical.com/ubuntu jammy partner"
