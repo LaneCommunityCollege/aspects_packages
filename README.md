@@ -63,6 +63,30 @@ aspects_packages_add_repo_apt_repos:
         < OS Release >: |
           < data >
 ```
+### aspects_packages_add_repo_apt_keys
+A dictionary/hash of apt keys to add. Currently only supports Ubuntu 22.04.
+
+I believe this method is needed for Debian 11 and up. But I have not tested to find out. 
+
+This is due to apt-key being deprecated. See [this issue](https://github.com/ansible/ansible/issues/78063) for details.
+
+```yaml
+aspects_packages_add_repo_apt_keys:
+  < repo name >:
+    enabled: < True|False >
+    Ubuntu:
+      2204:
+        key_url: "< url of the key >"
+        key_dest: "/etc/apt/keyrings/< repo name >.asc"
+```
+Then, in `aspects_packages_add_repo_apt_repos`, set the `repo` line to look like:
+```yaml
+aspects_packages_add_repo_apt_repos:
+  < repo name >:
+    Ubuntu:
+      2204: "deb [arch=amd64 signed-by=/etc/apt/keyrings/< repo name >.asc] < rest of the line here >"
+```
+> Note: If you use the `.gpg` extension, you need to run `gpg --dearmor` on the file. See [Docker's docs](https://docs.docker.com/engine/install/ubuntu/) for an example.
 
 ### aspects_packages_add_repo_yum_repos
 

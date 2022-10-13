@@ -56,6 +56,21 @@
     - aspects_packages
     - aspects_packages_add_repo_apt
 
+- name: Ubuntu 22.04 - apt - Add keys v2 for repos using direct url
+  when:
+    - ansible_lsb.codename == "jammy"
+  get_url:
+    url: "{{ item.value.Ubuntu.2204.key_url }}"
+    dest: "{{ item.value.Ubuntu.2204.key_dest }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop: "{{ aspects_packages_add_repo_apt_keys | default({}) | dict2items }}"
+  register: inprocess_task_result_key_url_v2_jammy
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: Debian 10 - apt - Add keys for repos using direct url
   when:
     - ansible_lsb.codename == "buster"
