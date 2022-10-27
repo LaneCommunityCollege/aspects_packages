@@ -27,6 +27,34 @@
     - aspects_packages_prerequisite_package_install
     - aspects_packages_package_install_yum
 
+- name: dnf - Install prerequisite packages on OracleLinux 8 state present
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
+  dnf:
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux8_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
+- name: dnf - Install prerequisite packages on OracleLinux 9 state present
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
+  dnf:
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+    state: "present"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux9_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
 - name: yum - Install prerequisite packages on CentOS 7 state latest
   when:
     - ansible_distribution == "CentOS"
@@ -56,6 +84,34 @@
     - aspects_packages_prerequisite_package_install
     - aspects_packages_package_install_yum
 
+- name: dnf - Install prerequisite packages on OracleLinux 8 state latest
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
+  dnf:
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux8_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
+- name: dnf - Install prerequisite packages on OracleLinux 9 state latest
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
+  dnf:
+    name: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+    state: "latest"
+    update_cache: True
+  register: inprocess_prerequisite_oraclelinux9_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_prerequisite_package_install
+    - aspects_packages_package_install_yum
+
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_present
   when: inprocess_prerequisite_centos7_result_present.changed
   debug:
@@ -72,6 +128,22 @@
     - aspects_packages
     - aspects_packages_package_install
 
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux8_result_present
+  when: inprocess_prerequisite_oraclelinux8_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux9_result_present
+  when: inprocess_prerequisite_oraclelinux9_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_centos7_result_latest
   when: inprocess_prerequisite_centos7_result_latest.changed
   debug:
@@ -84,6 +156,22 @@
   when: inprocess_prerequisite_oraclelinux7_result_latest.changed
   debug:
     msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux8_result_latest
+  when: inprocess_prerequisite_oraclelinux8_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_oraclelinux9_result_latest
+  when: inprocess_prerequisite_oraclelinux9_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install

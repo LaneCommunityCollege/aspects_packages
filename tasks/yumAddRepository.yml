@@ -36,3 +36,41 @@
   tags:
     - aspects_packages
     - aspects_packages_add_repo_yum
+
+- name: OracleLinux 8 - yum - Set repository state
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
+  yum_repository:
+    state: "{{ item.1.OracleLinux.8.state }}"
+    name: "{{ item.1.OracleLinux.8.name }}"
+    description: "{{ item.1.OracleLinux.8.description }}"
+    gpgkey: "{{ item.1.OracleLinux.8.gpgkey }}"
+    baseurl: "{{ item.1.OracleLinux.8.baseurl }}"
+    sslverify: "{{ item.1.OracleLinux.8.sslverify }}"
+    repo_gpgcheck: "{{ item.1.OracleLinux.8.repo_gpgcheck }}"
+    gpgcheck: "{{ item.1.OracleLinux.8.gpgcheck }}"
+    enabled: "{{ item.1.OracleLinux.8.enabled }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_yum
+
+- name: OracleLinux 9 - yum - Set repository state
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
+  yum_repository:
+    state: "{{ item.1.OracleLinux.9.state }}"
+    name: "{{ item.1.OracleLinux.9.name }}"
+    description: "{{ item.1.OracleLinux.9.description }}"
+    gpgkey: "{{ item.1.OracleLinux.9.gpgkey }}"
+    baseurl: "{{ item.1.OracleLinux.9.baseurl }}"
+    sslverify: "{{ item.1.OracleLinux.9.sslverify }}"
+    repo_gpgcheck: "{{ item.1.OracleLinux.9.repo_gpgcheck }}"
+    gpgcheck: "{{ item.1.OracleLinux.9.gpgcheck }}"
+    enabled: "{{ item.1.OracleLinux.9.enabled }}"
+  loop: "{{ aspects_packages_add_repo_yum_repos | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_yum

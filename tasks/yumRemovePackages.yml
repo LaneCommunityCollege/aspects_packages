@@ -26,6 +26,32 @@
     - aspects_packages_package_remove
     - aspects_packages_package_remove_yum
 
+- name: dnf - Remove packages on OracleLinux 8 state absent
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
+  dnf:
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+    state: "absent"
+  register: inprocess_oraclelinux8_result_absent
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: dnf - Remove packages on OracleLinux 9 state absent
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
+  dnf:
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+    state: "absent"
+  register: inprocess_oraclelinux9_result_absent
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
 - name: yum - Remove packages on CentOS 7 state purged
   when:
     - ansible_distribution == "CentOS"
@@ -52,6 +78,32 @@
     - aspects_packages_package_remove
     - aspects_packages_package_remove_yum
 
+- name: dnf - Remove packages on OracleLinux 8 state purged
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
+  dnf:
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+    state: "absent"
+  register: inprocess_oraclelinux8_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: dnf - Remove packages on OracleLinux 9 state purged
+  when:
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
+  dnf:
+    pkg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+    state: "absent"
+  register: inprocess_oraclelinux9_result_purged
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
 - name: Log list of packages when change occurs inprocess_centos7_result_absent
   when: inprocess_centos7_result_absent.changed
   debug:
@@ -65,6 +117,24 @@
   when: inprocess_oraclelinux7_result_absent.changed
   debug:
     msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.7', 'defined') | list | map(attribute='value.OracleLinux.7') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: Log list of packages when change occurs inprocess_oraclelinux8_result_absent
+  when: inprocess_oraclelinux8_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: Log list of packages when change occurs inprocess_oraclelinux9_result_absent
+  when: inprocess_oraclelinux9_result_absent.changed
+  debug:
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'absent') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_remove
@@ -87,4 +157,23 @@
     - aspects_packages
     - aspects_packages_package_remove
     - aspects_packages_package_remove_yum
+
+- name: Log list of packages when change occurs inprocess_oraclelinux8_result_purged
+  when: inprocess_oraclelinux8_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.8', 'defined') | list | map(attribute='value.OracleLinux.8') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
+- name: Log list of packages when change occurs inprocess_oraclelinux9_result_purged
+  when: inprocess_oraclelinux9_result_purged.changed
+  debug:
+    msg: "{{ aspects_packages_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'purged') | selectattr('value.OracleLinux.9', 'defined') | list | map(attribute='value.OracleLinux.9') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_remove
+    - aspects_packages_package_remove_yum
+
 ## End remove packages
