@@ -106,6 +106,19 @@ aspects_packages_add_repo_yum_repos:
         enabled: "< yes or no >"
 ```
 
+### aspects_packages_package_urls
+Default: undefined.
+
+Dictionary/hash of deb files to download and install.
+
+```yaml
+aspects_packages_package_urls:
+  < key >:
+    enabled: < True | False >
+    state: < present | absent >
+    url: < url to .deb file >
+```
+
 # Dependencies
 None.
 

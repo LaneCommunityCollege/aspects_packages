@@ -239,3 +239,15 @@ aspects_packages_add_repo_apt_repos:
         1804: "deb-src http://archive.canonical.com/ubuntu bionic partner"
         2004: "deb-src http://archive.canonical.com/ubuntu focal partner"
         2204: "deb-src http://archive.canonical.com/ubuntu jammy partner"
+
+# xz-utils package is required for installing deb files.
+aspects_packages_packages:
+  xz-utils:
+    state: "{% if aspects_packages_package_urls is defined %}present{% else %}default{% endif %}"
+    Ubuntu:
+      1804: "xz-utils"
+      2004: "xz-utils"
+      2204: "xz-utils"
+    Debian:
+      10: "xz-utils"
+      11: "xz-utils"
