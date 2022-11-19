@@ -130,3 +130,13 @@
     - aspects_packages
     - aspects_packages_package_install
 
+- name: "APT - include installing from url tasks"
+  when:
+    - ansible_pkg_mgr == "apt"
+    - aspects_packages_package_urls is defined
+  include_tasks: aptInstallPackageFromUrl.yml
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+    - aspects_packages_package_install_apt_url

@@ -8,3 +8,12 @@
   - aspects_packages
   - aspects_packages_add_repo_apt
   - aspects_packages_add_repo_yum
+  - aspects_packages_enabled
+  - aspects_packages_package_install
+  - aspects_packages_package_install_apt
+  - aspects_packages_package_install_apt_url
+  - aspects_packages_package_install_yum
+  - aspects_packages_package_remove
+  - aspects_packages_package_remove_yum
+  - aspects_packages_prerequisite_package_install
+  - aspects_packages_prerequisite_package_remove

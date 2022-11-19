@@ -90,6 +90,25 @@
     - aspects_packages
     - aspects_packages_add_repo_apt
 
+- name: Debian 11 - apt - Add keys for repos using direct url
+  when:
+    - ansible_lsb.codename == "bullseye"
+  apt_key:
+    state: "present"
+    url: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | default({}) | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_url.Debian.11', 'defined')
+              | list
+              | map(attribute='value.key_url.Debian.11')
+              | list | sort
+          }}"
+  register: inprocess_task_result_key_url_bullseye
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: Ubuntu 18.04 - apt - Add keys for repos using keyserver and id.
   when:
     - ansible_lsb.codename == "bionic"
@@ -162,6 +181,25 @@
               | list | sort
         }}"
   register: inprocess_task_result_key_id_buster
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 11 - apt - Add keys for repos using keyserver and id.
+  when:
+    - ansible_lsb.codename == "bullseye"
+  apt_key:
+    state: "present"
+    keyserver: "{{ item.value.keyserver.Debian.11 }}"
+    id: "{{ item.value.key_id.Debian.11 }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | default({}) | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.key_id.Debian.11', 'defined')
+              | selectattr('value.keyserver.Debian.11', 'defined')
+              | list | sort
+        }}"
+  register: inprocess_task_result_key_id_bullseye
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt
@@ -242,6 +280,25 @@
     - aspects_packages
     - aspects_packages_add_repo_apt
 
+- name: Debian 11 - apt - Add keys for repos using data
+  when:
+    - ansible_lsb.codename == "bullseye"
+  apt_key:
+    state: "present"
+    data: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | default({}) | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.data.Debian.11', 'defined')
+              | list
+              | map(attribute='value.data.Debian.11')
+              | list | sort
+          }}"
+  register: inprocess_task_result_key_data_bullseye
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: Ubuntu 18.04 - apt - Add extra repos
   when:
     - ansible_lsb.codename == "bionic"
@@ -314,24 +371,46 @@
     - aspects_packages
     - aspects_packages_add_repo_apt
 
+- name: Debian 11 - apt - Add extra repos
+  when:
+    - ansible_lsb.codename == "bullseye"
+  apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ aspects_packages_add_repo_apt_repos
+              | default({}) | dict2items
+              | selectattr('value.enabled', 'eq', True)
+              | selectattr('value.repo.Debian.11', 'defined')
+              | list
+              | map(attribute='value.repo.Debian.11')
+              | list | sort
+          }}"
+  register: inprocess_task_result_repo_bullseye
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: "Update apt cache when a new key and/or repo is added."
   when: (
     inprocess_task_result_key_url_bionic.changed
     or inprocess_task_result_key_url_focal.changed
     or inprocess_task_result_key_url_jammy.changed
     or inprocess_task_result_key_url_buster.changed
+    or inprocess_task_result_key_url_bullseye.changed
     or inprocess_task_result_key_id_bionic.changed
     or inprocess_task_result_key_id_focal.changed
     or inprocess_task_result_key_id_jammy.changed
     or inprocess_task_result_key_id_buster.changed
+    or inprocess_task_result_key_id_bullseye.changed
     or inprocess_task_result_key_data_bionic.changed
     or inprocess_task_result_key_data_focal.changed
     or inprocess_task_result_key_data_jammy.changed
     or inprocess_task_result_key_data_buster.changed
+    or inprocess_task_result_key_data_bullseye.changed
     or inprocess_task_result_repo_bionic.changed
     or inprocess_task_result_repo_focal.changed
     or inprocess_task_result_repo_jammy.changed
     or inprocess_task_result_repo_buster.changed
+    or inprocess_task_result_repo_bullseye.changed
     )
   shell: "apt-get update"
   tags:

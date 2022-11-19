@@ -1,0 +1,11 @@
+- name: "APT - Set package state from URL"
+  when: item.1.enabled
+  loop: "{{ aspects_packages_package_urls | default({}) | dictsort }}"
+  apt:
+    state: "{{ item.1.state }}"
+    deb: "{{ item.1.url }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+    - aspects_packages_package_install_apt_url

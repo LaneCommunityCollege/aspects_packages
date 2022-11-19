@@ -59,6 +59,21 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
+- name: install Debian 11 prerequisite packages with state present
+  when:
+    - ansible_lsb.codename == "bullseye"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.11', 'defined') | list | map(attribute='value.Debian.11') | list | sort }}"
+    state: "present"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_prerequisite_bullseye_result_present
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
 - name: install Ubuntu 18.04 prerequisite packages with state latest
   when:
     - ansible_lsb.codename == "bionic"
@@ -119,6 +134,21 @@
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
 
+- name: install Debian 11 prerequisite packages with state latest
+  when:
+    - ansible_lsb.codename == "bullseye"
+    - ansible_lsb.id == "Debian"
+  apt:
+    pkg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.11', 'defined') | list | map(attribute='value.Debian.11') | list | sort }}"
+    state: "latest"
+    update_cache: "yes"
+    cache_valid_time: "14400"
+  register: inprocess_prerequisite_bullseye_result_latest
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
 - name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bionic_result_present
   when: inprocess_prerequisite_bionic_result_present.changed
   debug:
@@ -141,6 +171,24 @@
   when: inprocess_prerequisite_jammy_result_present.changed
   debug:
     msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Ubuntu.2204', 'defined') | list | map(attribute='value.Ubuntu.2204') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_buster_result_present
+  when: inprocess_prerequisite_buster_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.10', 'defined') | list | map(attribute='value.Debian.10') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bullseye_result_present
+  when: inprocess_prerequisite_bullseye_result_present.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'present') | selectattr('value.Debian.11', 'defined') | list | map(attribute='value.Debian.11') | list | sort }}"
   tags:
     - aspects_packages
     - aspects_packages_package_install
@@ -181,4 +229,14 @@
     - aspects_packages
     - aspects_packages_package_install
     - aspects_packages_package_install_apt
+
+- name: Log list of prerequisite packages when change occurs inprocess_prerequisite_bullseye_result_latest
+  when: inprocess_prerequisite_bullseye_result_latest.changed
+  debug:
+    msg: "{{ aspects_packages_prerequisite_packages | default({}) | dict2items | selectattr('value.state', 'eq', 'latest') | selectattr('value.Debian.11', 'defined') | list | map(attribute='value.Debian.11') | list | sort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_package_install
+    - aspects_packages_package_install_apt
+
 ## End install aspects_packages_prerequisite_packages
