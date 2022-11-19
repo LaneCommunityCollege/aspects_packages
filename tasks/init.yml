@@ -3,7 +3,8 @@
   when:
     - ansible_pkg_mgr == "apt"
     - ( ansible_lsb.codename == "bionic"
-        or ansible_lsb.codename == "focal" )
+        or ansible_lsb.codename == "focal" 
+        or ansible_lsb.codename == "jammy" )
     - ( aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main.enabled
         or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_main_src.enabled
         or aspects_packages_add_repo_apt_repos.ubuntu_official_mirrors_restricted.enabled
