@@ -1,0 +1,28 @@
+- name: "FLATPAK - Set flatpak remote state."
+  when: item.1.enabled
+  flatpak_remote:
+    state: "{{ item.1.state }}"
+    name: "{{ item.1.name }}"
+    flatpakrepo_url: "{{ item.1.flatpakrepo_url }}"
+    executable: "{{ item.1.executable | default('flatpak') }}"
+    method: "{{ item.1.method | default('system') }}"
+  loop: "{{ aspects_packages_flatpak_remotes | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_flatpak
+    - aspects_packages_flatpak_remotes
+
+- name: "FLATPAK - Set flatpak package state."
+  when: item.1.enabled
+  flatpak:
+    state: "{{ item.1.state }}"
+    name: "{{ item.1.name }}"
+    remote: "{{ item.1.remote | default('flathub') }}"
+    method: "{{ item.1.method | default('system') }}"
+    executable: "{{ item.1.executable | default('flatpak') }}"
+    #no_dependencies: "{{ item.1.no_dependencies | default(false) }}"
+  loop: "{{ aspects_packages_flatpak_packages | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_flatpak
+    - aspects_packages_flatpak_packages

@@ -1,4 +1,15 @@
 ---
+- name: Create /etc/apt/keyrings/
+  file:
+    state: directory
+    path: /etc/apt/keyrings/
+    owner: root
+    group: root
+    mode: "0755"
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
 - name: Ubuntu 18.04 - apt - Add keys for repos using direct url
   when:
     - ansible_lsb.codename == "bionic"
@@ -105,6 +116,23 @@
               | list | sort
           }}"
   register: inprocess_task_result_key_url_bullseye
+  tags:
+    - aspects_packages
+    - aspects_packages_add_repo_apt
+
+- name: Debian 11 - apt - Add keys v2 for repos using direct url
+  when:
+    - ansible_lsb.codename == "bullseye"
+    - item.value.Debian.11.key_url is defined
+    - item.value.Debian.11.key_dest is defined
+  get_url:
+    url: "{{ item.value.Debian.11.key_url }}"
+    dest: "{{ item.value.Debian.11.key_dest }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop: "{{ aspects_packages_add_repo_apt_keys | default({}) | dict2items }}"
+  register: inprocess_task_result_key_url_v2_bullseye
   tags:
     - aspects_packages
     - aspects_packages_add_repo_apt

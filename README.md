@@ -1,11 +1,11 @@
 # aspects_packages
 An Ansible utility role that helps manage OS package state based on what OS is on the target. Can also manage simple pip packages.
-  
+
 # Requirements
 Set ```hash_behaviour=merge``` in your ansible.cfg file.
 
 `python-apt` should be installed on Debian and Ubuntu targets.
-  
+
 # Role Variables
 ### `aspects_packages_enabled`
 Boolean. Whether the tasks in this role should be run or not.
@@ -38,7 +38,7 @@ Set `state` to "absent" if you wish to remove a package.
 Check the [tasks/aptInstallpackages.yml](aptInstallpackages.yml) or [tasks/yumInstallPackages.yml](yumInstallPackages.yml) files to find out what values are accepted for the `ansible_distribution_*` variables.
 
 ### aspects_packages_add_repo_apt_repos
-A dictionary/hash of apt repositories to add. 
+A dictionary/hash of apt repositories to add.
 
 See the example playbook for how to mix and match the different ways to set the key.
 
@@ -66,7 +66,7 @@ aspects_packages_add_repo_apt_repos:
 ### aspects_packages_add_repo_apt_keys
 A dictionary/hash of apt keys to add. Currently only supports Ubuntu 22.04.
 
-I believe this method is needed for Debian 11 and up. But I have not tested to find out. 
+I believe this method is needed for Debian 11 and up. But I have not tested to find out.
 
 This is due to apt-key being deprecated. See [this issue](https://github.com/ansible/ansible/issues/78063) for details.
 
@@ -94,7 +94,7 @@ aspects_packages_add_repo_apt_repos:
 aspects_packages_add_repo_yum_repos:
   < repo key >:
     < OS >:
-      < OS Release >: 
+      < OS Release >:
         state: "< present | absent >"
         name: "< what the file in /etc/yum.repos.d will be called >"
         description: "< short description of the repo >"
@@ -117,6 +117,51 @@ aspects_packages_package_urls:
     enabled: < True | False >
     state: < present | absent >
     url: < url to .deb file >
+```
+
+### aspects_packages_snap_items
+Default: undefined.
+
+Dictionary/hash of snaps to install or remove.
+
+```yaml
+aspects_packages_snap_items:
+  < key >:
+    enabled: < True | False >
+    state: < present | absent >
+    name: < name of snap >
+```
+
+### aspects_packages_flatpak_remotes
+Default: undefined.
+
+Dictionary/hash of Flatpak remotes to install or remove.
+
+```yaml
+aspects_packages_flatpak_remotes:
+  < key >:
+    enabled: < True | False >
+    state: < present | absent >
+    name: < name of remote >
+    flatpakrepo_url: < remote url >
+    executable: < flatpak executable. Defaults to 'flatpak' >
+    method: < system|user. Defaults to 'system' >
+```
+
+### aspects_packages_flatpak_packages
+Default: undefined.
+
+Dictionary/hash of Flatpak packages to install or remove.
+
+```yaml
+aspects_packages_flatpak_packages:
+  < key >:
+    enabled: < True | False >
+    state: < present | absent >
+    name: < name or url of package >
+    remote: < name of remote. Defaults to 'flathub' >
+    executable: < flatpak executable. Defaults to 'flatpak' >
+    method: < system|user Defaults to 'system' >
 ```
 
 # Dependencies
@@ -471,7 +516,7 @@ None.
             1604: |
               -----BEGIN PGP PUBLIC KEY BLOCK-----
               Version: GnuPG v2.0.14 (GNU/Linux)
-    
+
               mQENBFI3HsoBCADXDtbNJnxbPqB1vDNtCsqhe49vFYsZN9IOZsZXgp7aHjh6CJBD
               A+bGFOwyhbd7at35jQjWAw1O3cfYsKAmFy+Ar3LHCMkV3oZspJACTIgCrwnkic/9
               CUliQe324qvObU2QRtP4Fl0zWcfb/S8UYzWXWIFuJqMvE9MaRY1bwUBvzoqavLGZ
@@ -503,7 +548,7 @@ None.
             1804: |
               -----BEGIN PGP PUBLIC KEY BLOCK-----
               Version: GnuPG v2.0.14 (GNU/Linux)
-    
+
               mQENBFI3HsoBCADXDtbNJnxbPqB1vDNtCsqhe49vFYsZN9IOZsZXgp7aHjh6CJBD
               A+bGFOwyhbd7at35jQjWAw1O3cfYsKAmFy+Ar3LHCMkV3oZspJACTIgCrwnkic/9
               CUliQe324qvObU2QRtP4Fl0zWcfb/S8UYzWXWIFuJqMvE9MaRY1bwUBvzoqavLGZ
@@ -535,7 +580,7 @@ None.
             2004: |
               -----BEGIN PGP PUBLIC KEY BLOCK-----
               Version: GnuPG v2.0.14 (GNU/Linux)
-    
+
               mQENBFI3HsoBCADXDtbNJnxbPqB1vDNtCsqhe49vFYsZN9IOZsZXgp7aHjh6CJBD
               A+bGFOwyhbd7at35jQjWAw1O3cfYsKAmFy+Ar3LHCMkV3oZspJACTIgCrwnkic/9
               CUliQe324qvObU2QRtP4Fl0zWcfb/S8UYzWXWIFuJqMvE9MaRY1bwUBvzoqavLGZ
@@ -568,7 +613,7 @@ None.
             9: |
               -----BEGIN PGP PUBLIC KEY BLOCK-----
               Version: GnuPG v2.0.14 (GNU/Linux)
-    
+
               mQENBFI3HsoBCADXDtbNJnxbPqB1vDNtCsqhe49vFYsZN9IOZsZXgp7aHjh6CJBD
               A+bGFOwyhbd7at35jQjWAw1O3cfYsKAmFy+Ar3LHCMkV3oZspJACTIgCrwnkic/9
               CUliQe324qvObU2QRtP4Fl0zWcfb/S8UYzWXWIFuJqMvE9MaRY1bwUBvzoqavLGZ
@@ -600,7 +645,7 @@ None.
             10: |
               -----BEGIN PGP PUBLIC KEY BLOCK-----
               Version: GnuPG v2.0.14 (GNU/Linux)
-    
+
               mQENBFI3HsoBCADXDtbNJnxbPqB1vDNtCsqhe49vFYsZN9IOZsZXgp7aHjh6CJBD
               A+bGFOwyhbd7at35jQjWAw1O3cfYsKAmFy+Ar3LHCMkV3oZspJACTIgCrwnkic/9
               CUliQe324qvObU2QRtP4Fl0zWcfb/S8UYzWXWIFuJqMvE9MaRY1bwUBvzoqavLGZ
@@ -678,6 +723,22 @@ None.
             repo_gpgcheck: "yes"
             gpgcheck: "yes"
             enabled: "yes"
+    aspects_packages_snap_items:
+      adguard:
+        enabled: True
+        state: "present"
+        name: "adguard"
+    aspects_packages_flatpak_remotes:
+      flathub:
+        enabled: True
+        state: "present"
+        name: "flathub"
+        flatpakrepo_url: "https://flathub.org/repo/flathub.flatpakrepo"
+    aspects_packages_flatpak_packages:
+      firefox:
+        enabled: True
+        state: "present"
+        name: "org.mozilla.firefox"
   roles:
   - aspects_packages
 ```

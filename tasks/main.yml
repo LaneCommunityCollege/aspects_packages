@@ -17,3 +17,10 @@
   - aspects_packages_package_remove_yum
   - aspects_packages_prerequisite_package_install
   - aspects_packages_prerequisite_package_remove
+  - aspects_packages_snap
+  - aspects_packages_snap_remove
+  - aspects_packages_snap_install
+  - aspects_packages
+  - aspects_packages_flatpack
+  - aspects_packages_flatpack_remotes
+  - aspects_packages_flatpack_packages

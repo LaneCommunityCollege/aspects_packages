@@ -1,0 +1,21 @@
+- name: SNAP - Install a snap package
+  when: item.1.enabled and item.1.state == "present"
+  snap:
+    state: present
+    name: "{{ item.1.name }}"
+  loop: "{{ aspects_packages_snap_items | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_snap
+    - aspects_packages_snap_install
+
+- name: SNAP - Remove a snap package
+  when: item.1.enabled and item.1.state == "absent"
+  snap:
+    state: absent
+    name: "{{ item.1.name }}"
+  loop: "{{ aspects_packages_snap_items | default({}) | dictsort }}"
+  tags:
+    - aspects_packages
+    - aspects_packages_snap
+    - aspects_packages_snap_remove
