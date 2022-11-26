@@ -20,7 +20,6 @@
     remote: "{{ item.1.remote | default('flathub') }}"
     method: "{{ item.1.method | default('system') }}"
     executable: "{{ item.1.executable | default('flatpak') }}"
-    #no_dependencies: "{{ item.1.no_dependencies | default(false) }}"
   loop: "{{ aspects_packages_flatpak_packages | default({}) | dictsort }}"
   tags:
     - aspects_packages
