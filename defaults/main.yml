@@ -1,6 +1,244 @@
 ---
 aspects_packages_enabled: False
 aspects_packages_add_repo_apt_repos:
+  ubuntu_us_archive_main:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic main"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal main"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy main"
+  ubuntu_us_archive_main_src:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic main"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal main"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy main"
+  ubuntu_us_archive_restricted:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic restricted"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal restricted"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy restricted"
+  ubuntu_us_archive_restricted_src:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic restricted"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal restricted"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy restricted"
+  ubuntu_us_archive_universe:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic universe"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal universe"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy universe"
+  ubuntu_us_archive_universe_src:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic universe"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal universe"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy universe"
+  ubuntu_us_archive_multiverse:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic multiverse"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal multiverse"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy multiverse"
+  ubuntu_us_archive_multiverse_src:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic multiverse"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal multiverse"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy multiverse"
+  ubuntu_us_archive_main_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates main"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-updates main"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates main"
+  ubuntu_us_archive_main_src_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-updates main"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates main"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates main"
+  ubuntu_us_archive_restricted_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates restricted"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-updates restricted"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates restricted"
+  ubuntu_us_archive_restricted_src_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-updates restricted"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates restricted"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates restricted"
+  ubuntu_us_archive_universe_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates universe"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-updates universe"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates universe"
+  ubuntu_us_archive_universe_src_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-updates universe"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates universe"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates universe"
+  ubuntu_us_archive_multiverse_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates multiverse"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-updates multiverse"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates multiverse"
+  ubuntu_us_archive_multiverse_src_updates:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-updates multiverse"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates multiverse"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates multiverse"
+  ubuntu_us_archive_main_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports main"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports main"
+  ubuntu_us_archive_main_src_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-backports main"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-backports main"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-backports main"
+  ubuntu_us_archive_restricted_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports restricted"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-backports restricted"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports restricted"
+  ubuntu_us_archive_restricted_src_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-backports restricted"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-backports restricted"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-backports restricted"
+  ubuntu_us_archive_universe_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports universe"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-backports universe"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports universe"
+  ubuntu_us_archive_universe_src_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-backports universe"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-backports universe"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-backports universe"
+  ubuntu_us_archive_multiverse_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports multiverse"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-backports multiverse"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports multiverse"
+  ubuntu_us_archive_multiverse_src_backports:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-backports multiverse"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-backports multiverse"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-backports multiverse"
+  ubuntu_us_archive_main_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-security main"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-security main"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-security main"
+  ubuntu_us_archive_main_src_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-security main"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-security main"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-security main"
+  ubuntu_us_archive_restricted_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-security restricted"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-security restricted"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-security restricted"
+  ubuntu_us_archive_restricted_src_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-security restricted"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-security restricted"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-security restricted"
+  ubuntu_us_archive_universe_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-security universe"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-security universe"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-security universe"
+  ubuntu_us_archive_universe_src_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-security universe"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-security universe"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-security universe"
+  ubuntu_us_archive_multiverse_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://us.archive.ubuntu.com/ubuntu/ bionic-security multiverse"
+        2004: "deb http://us.archive.ubuntu.com/ubuntu/ focal-security multiverse"
+        2204: "deb http://us.archive.ubuntu.com/ubuntu/ jammy-security multiverse"
+  ubuntu_us_archive_multiverse_src_security:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://us.archive.ubuntu.com/ubuntu/ bionic-security multiverse"
+        2004: "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-security multiverse"
+        2204: "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-security multiverse"
+  ubuntu_us_archive_multiverse_partner:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb http://archive.canonical.com/ubuntu bionic partner"
+        2004: "deb http://archive.canonical.com/ubuntu focal partner"
+        2204: "deb http://archive.canonical.com/ubuntu jammy partner"
+  ubuntu_us_archive_multiverse_src_partner:
+    enabled: False
+    repo:
+      Ubuntu:
+        1804: "deb-src http://archive.canonical.com/ubuntu bionic partner"
+        2004: "deb-src http://archive.canonical.com/ubuntu focal partner"
+        2204: "deb-src http://archive.canonical.com/ubuntu jammy partner"
   ubuntu_official_mirrors_main:
     enabled: False
     repo:
